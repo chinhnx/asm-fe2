@@ -1,50 +1,79 @@
 {
-    "products": [
-        {
-            "name": "iPhone 15 Pro",
-            "image": "https://example.com/iphone15pro.jpg",
-            "price": "9990000",
-            "id": 101,
-            "description": "Smartphone cao cấp với chip A17 Bionic",
-            "categoryId": "1",
-            "descriptionDetail": "Màn hình OLED 6.1 inch, camera 48MP, hỗ trợ 5G"
-        },
-        {
-            "name": "Samsung Galaxy S24 Ultra",
-            "image": "https://example.com/galaxyS24ultra.jpg",
-            "price": "10990000",
-            "id": 102,
-            "description": "Điện thoại flagship với bút S-Pen",
-            "categoryId": "1",
-            "descriptionDetail": "Màn hình AMOLED 6.8 inch, Snapdragon 8 Gen 3, pin 5000mAh"
-        },
-        {
-            "name": "Google Pixel 8 Pro",
-            "image": "https://example.com/pixel8pro.jpg",
-            "price": "8990000",
-            "id": 103,
-            "description": "Trải nghiệm Android thuần với Google AI",
-            "categoryId": "1",
-            "descriptionDetail": "Màn hình OLED 6.7 inch, chip Tensor G3, camera AI"
-        },
-        {
-            "name": "Xiaomi 13 Pro",
-            "image": "https://example.com/xiaomi13pro.jpg",
-            "price": "7990000",
-            "id": 104,
-            "description": "Camera Leica chuyên nghiệp",
-            "categoryId": "1",
-            "descriptionDetail": "Snapdragon 8 Gen 2, màn hình LTPO 120Hz, sạc 120W"
-        },
-        {
-            "name": "OnePlus 12",
-            "image": "https://example.com/oneplus12.jpg",
-            "price": "7500000",
-            "id": 105,
-            "description": "Hiệu năng mạnh với OxygenOS",
-            "categoryId": "1",
-            "descriptionDetail": "Chip Snapdragon 8 Gen 3, màn hình AMOLED 120Hz"
-        }
+"products": [
+  {
+    "id": 1,
+    "name": "iPhone 15 Pro Max",
+    "brand": "Apple",
+    "categoryId": 1,
+    "price": 32990000,
+    "description": "iPhone 15 Pro Max với chip A17 Pro, camera 48MP.",
+    "image": "https://example.com/iphone15.png",
+    "stock": 15,
+    "sold": 3,
+    "specs": {
+      "screen": "6.7 inch Super Retina XDR",
+      "chip": "A17 Pro",
+      "ram": "8GB",
+      "storage": "256GB",
+      "battery": "4400mAh",
+      "camera": "48MP + 12MP + 12MP"
+    },
+    "rating": 4.8
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S24 Ultra",
+    "brand": "Samsung",
+    "categoryId": 1,
+    "price": 29990000,
+    "description": "Galaxy S24 Ultra với chip Snapdragon 8 Gen 3, bút S-Pen.",
+    "image": "https://example.com/s24ultra.png",
+    "stock": 20,
+    "sold": 5,
+    "specs": {
+      "screen": "6.8 inch Dynamic AMOLED 2X",
+      "chip": "Snapdragon 8 Gen 3",
+      "ram": "12GB",
+      "storage": "512GB",
+      "battery": "5000mAh",
+      "camera": "200MP + 12MP + 10MP"
+    },
+    "rating": 4.7
+  }
+]
+,
+"categories": [
+  { "id": 1, "name": "Điện thoại" },
+  { "id": 2, "name": "Phụ kiện" },
+  { "id": 3, "name": "Máy tính bảng" }
+],
+"orders": [
+  {
+    "id": 1,
+    "userId": 1,
+    "items": [
+      { "productId": 1, "quantity": 1, "price": 32990000 },
+      { "productId": 2, "quantity": 1, "price": 29990000 }
     ],
-    "user": []
+    "total": 62980000,
+    "status": "pending",
+    "createdAt": "2025-03-13T10:00:00Z",
+    "paymentMethod": "credit_card"
+  }
+],
+"users": [
+  {
+    "id": 1,
+    "name": "Nguyễn Văn A",
+    "email": "nguyenvana@example.com",
+    "password": "hashed_password",
+    "phone": "0987654321",
+    "address": "123 Đường ABC, Hà Nội"
+  }
+]
+
+
+
+
+
 }
