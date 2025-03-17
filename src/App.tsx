@@ -10,6 +10,7 @@ import ProductEdit from './pages/admin/product/ProductEdit';
 import CategoryList from './pages/admin/category/CategoryList';
 import CategoryAdd from './pages/admin/category/CategoryAdd';
 import CategoryEdit from './pages/admin/category/CategoryEdit';
+import Dashboard from './layout/dashboard';
 
 
 function App() {
@@ -32,28 +33,25 @@ function App() {
       element: <ProductEdit />
     },
     {
-      path: '/homepage',
-      element: <HomePage />
+      path: '/admin/category',
+      element: <CategoryList />
     },
+    {
+      path: '/admin/category-add',
+      element: <CategoryAdd />
+    },
+    {
+      path: '/admin/category-edit/:id',
+      element: <CategoryEdit />
+    },
+    {
+      path: "/admin",
+      element : <Dashboard/>
+    }
+    
+    
   ])
-  // return (
-  //   <>
-  //     <Routes>
-
-  //       <Route path='/homepage' element={< HomePage />} />
-  //       <Route path='/admin/product' element={< ProductList />} />
-  //       <Route path='/admin/product-add' element={< ProductAdd />} />
-  //       <Route path='/admin/product-edit/:id' element={< ProductEdit />} />
-  //       <Route path='/admin/category' element={< CategoryList />} />
-  //       <Route path='/admin/category-add' element={< CategoryAdd />} />
-  //       <Route path='/admin/category-edit/:id' element={< CategoryEdit />} />
-
-  //       <Route path='/admin' element={< Dashboard />} />
-
-  //     </Routes>
-
-  //   </>
-  // )
+ 
   return <div>{element}</div>;
 
 }
