@@ -97,11 +97,10 @@ function ProductList() {
     return (
       <div>
          <Button
-        type="primary"
-        style={{ marginBottom: 16 }}
+        style={{ marginBottom: 16 , backgroundColor: "green", borderColor: "green", color: "white"}}
         onClick={() => nav("/admin/product-add")}
       >
-        Add Bubble Tea
+        Them san pham
       </Button>
         <Table dataSource={data} columns={columns} loading={isLoading} />;
       </div>

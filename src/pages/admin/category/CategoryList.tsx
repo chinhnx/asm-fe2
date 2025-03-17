@@ -1,54 +1,54 @@
-import { Image, Table, Button, message, Modal } from "antd";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button, message, Modal, Table, Image } from "antd";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Icategory } from "../../../interface/category";
 
-function ProductList() {
-  const nav = useNavigate()
+const CategoryList = () => {
+    const nav = useNavigate();
     const queryClient = useQueryClient();
 
-  
-    const getAllProduct = async () => {
-        const { data } = await axios.get("http://localhost:3000/products");
-        return data.map((product: any, index: number) => ({
-            ...product,
-            key: product.id || `product-${index}`,
+    // Fetch categories
+    const getAllCategories = async () => {
+        const { data } = await axios.get("http://localhost:3000/categories");
+        return data.map((category:any, index:number) => ({
+            ...category,
+            key: category.id || `category-${index}`,
         }));
     };
 
     const { data, isLoading } = useQuery({
-        queryKey: ["products"],
-        queryFn: getAllProduct,
+        queryKey: ["categories"], // ✅ Đúng query key
+        queryFn: getAllCategories,
     });
 
-    // Mutation xoa san pham
-    const deleteProduct = useMutation({
+    // Mutation để xóa danh mục
+    const deleteCategory = useMutation({
         mutationFn: async (id: number) => {
-            await axios.delete(`http://localhost:3000/products/${id}`);
+            await axios.delete(`http://localhost:3000/categories/${id}`);
         },
         onSuccess: () => {
-            message.success("Xoa thanh cong");
-            queryClient.invalidateQueries(["products"]); 
+            message.success("Xóa thành công!");
+            // queryClient.invalidateQueries(["categories"]); // ✅ Làm mới danh sách
         },
         onError: () => {
-            message.error("Xoa that bai");
+            message.error("Xóa thất bại!");
         },
     });
 
-    
-
+    // Hộp thoại xác nhận xóa
     const confirmDelete = (id: number) => {
-      Modal.confirm({
-          title: "Xác nhận xóa",
-          content: "Bạn có chắc chắn muốn xóa sản phẩm này?",
-          okText: "Xóa",
-          okType: "danger",
-          cancelText: "Hủy",
-          onOk: () => deleteProduct.mutate(id),
-      });
-  };
+        Modal.confirm({
+            title: "Xác nhận xóa",
+            content: "Bạn có chắc chắn muốn xóa danh mục này?",
+            okText: "Xóa",
+            okType: "danger",
+            cancelText: "Hủy",
+            onOk: () => deleteCategory.mutate(id),
+        });
+    };
 
-  
+    // Cấu trúc bảng
     const columns = [
         {
             title: "Name",
@@ -63,49 +63,53 @@ function ProductList() {
             render: (image: string) => <Image src={image} width={100} />,
         },
         {
-            title: "Brand",
-            dataIndex: "brand",
-            key: "brand",
+            title: "Description",
+            dataIndex: "description",
+            key: "description",
         },
         {
-            title: "Stock",
-            dataIndex: "stock",
-            key: "stock",
+            title: "CreatAt",
+            dataIndex: "createdAt",
+            key: "createdAt",
         },
         {
-            title: "Sold",
-            dataIndex: "sold",
-            key: "sold",
+            title: "UpdateAt",
+            dataIndex: "updatedAt",
+            key: "updatedAt",
         },
-        {
-            title: "Price",
-            dataIndex: "price",
-            key: "price",
-        },
+        
         {
             title: "Action",
             dataIndex: "",
-            key: "x",
+            key: "action",
             render: (record: any) => (
-                <Button type="primary" danger onClick={() => confirmDelete(record.id)}>
-                    Delete
-                </Button>
+                <>
+                    <Button
+                        type="link"
+                        onClick={() => nav(`/admin/category-edit/${record.id}`)}
+                    >
+                        Edit
+                    </Button>
+                    <Button type="link" danger onClick={() => confirmDelete(record.id)}>
+                        Delete
+                    </Button>
+                </>
             ),
         },
     ];
 
     return (
-      <div>
-         <Button
-        type="primary"
-        style={{ marginBottom: 16 }}
-        onClick={() => nav("/admin/product-add")}
-      >
-        Add Bubble Tea
-      </Button>
-        <Table dataSource={data} columns={columns} loading={isLoading} />;
-      </div>
-    )
-}
+        <div>
+            <Button
+                type="primary"
+                style={{ marginBottom: 16 , backgroundColor: "green", borderColor: "green", color: "white"}}
+                onClick={() => nav("/admin/category-add")} 
+            >
+                Add Category
+            </Button>
+            <Table dataSource={data} columns={columns} loading={isLoading} />
+        </div>
+    );
+};
 
-export default ProductList;
+export default CategoryList;

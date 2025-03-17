@@ -26,18 +26,32 @@
     }
   ],
   "categories": [
-    {
-      "id": 1,
-      "name": "Điện thoại"
-    },
-    {
-      "id": 2,
-      "name": "Phụ kiện"
-    },
-    {
-      "id": 3,
-      "name": "Máy tính bảng"
-    }
+    [
+      {
+        "id": 1,
+        "name": "Smartphones",
+        "image": "https://example.com/iphone15.png",
+        "description": "Các dòng điện thoại thông minh cao cấp và phổ thông",
+        "createdAt": "2024-03-01T10:00:00Z",
+        "updatedAt": "2024-03-05T12:30:00Z"
+      },
+      {
+        "id": 2,
+        "name": "Laptops",
+        "image": "https://example.com/iphone15.png",
+        "description": "Laptop văn phòng, gaming, đồ họa chuyên nghiệp",
+        "createdAt": "2024-03-02T14:20:00Z",
+        "updatedAt": "2024-03-06T16:45:00Z"
+      },
+      {
+        "id": 3,
+        "name": "Tablets",
+        "image": "https://example.com/iphone15.png",
+        "description": "Máy tính bảng các thương hiệu nổi tiếng",
+        "createdAt": "2024-03-03T09:15:00Z",
+        "updatedAt": "2024-03-07T10:00:00Z"
+      }
+    ]
   ],
   "orders": [
     {
@@ -69,6 +83,11 @@
       "password": "hashed_password",
       "phone": "0987654321",
       "address": "123 Đường ABC, Hà Nội"
+    },
+    {
+      "email": "lam15081999@gmail.com",
+      "password": "$2a$10$ME971pRXRCcUBdY4lriVDOV/3cpJDcovMV7VeKxsebgc0LuZ5t.oe",
+      "id": 2
     }
   ]
 }
