@@ -1,54 +1,109 @@
-import React from "react";
+import React from 'react';
+import { Layout, Menu, Typography, Row, Col, Card, Button, theme } from 'antd';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Home, ShoppingBag, ShoppingCart, Truck, Shield, Clock } from 'lucide-react';
+import ProductDetail from '../../pages/client/ProductDetail';
+import Product from './Products';
+import Cart from './Cart';
 
-const HomePage = () => {
+const { Header, Content, Footer } = Layout;
+const { Title, Paragraph } = Typography;
+
+const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
+  const menuItems = [
+    { key: '/', icon: <Home size={16} />, label: 'Home' },
+    { key: '/products', icon: <ShoppingBag size={16} />, label: 'Products' },
+    { key: '/cart', icon: <ShoppingCart size={16} />, label: 'Cart' },
+  ];
+
+  const features = [
+    { icon: <ShoppingBag size={32} />, title: 'Wide Selection', description: 'Browse through our extensive collection of premium products' },
+    { icon: <Truck size={32} />, title: 'Fast Delivery', description: 'Get your orders delivered quickly and efficiently' },
+    { icon: <Shield size={32} />, title: 'Secure Shopping', description: 'Shop with confidence with our secure payment system' },
+    { icon: <Clock size={32} />, title: '24/7 Support', description: 'Our customer service team is always here to help' },
+  ];
+
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex flex-col w-full h-screen ">
+    <Layout style={{ minHeight: '100vh', width: '100vw' }}>
       {/* Header */}
-      <header className="bg-black py-4 w-full">
-        <div className="container mx-auto flex justify-between items-center px-6">
-          <h1 className="text-2xl font-bold text-orange-500">PhoneStore</h1>
-          <nav>
-            <ul className="flex space-x-6">
-              <li><a href="#" className="hover:text-orange-400">Trang chủ</a></li>
-              <li><a href="#" className="hover:text-orange-400">Sản phẩm</a></li>
-              <li><a href="#" className="hover:text-orange-400">Giới thiệu</a></li>
-              <li><a href="#" className="hover:text-orange-400">Liên hệ</a></li>
-            </ul>
-          </nav>
+      <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%', display: 'flex', alignItems: 'center' }}>
+        <div className="logo" style={{ color: 'white', marginRight: '24px', fontSize: '20px', fontWeight: 'bold' }}>
+          SHOP
         </div>
-      </header>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['/']}
+          items={menuItems}
+          onClick={(e) => navigate(e.key)}
+          style={{ flex: 1, minWidth: 0 }}
+        />
+      </Header>
 
-      {/* Banner */}
-      <section className="flex-grow flex flex-col justify-center items-center text-center py-20 bg-gray-800 w-full">
-        <h2 className="text-4xl font-bold text-orange-500">Chào mừng đến với PhoneStore</h2>
-        <p className="mt-4 text-gray-300">Mua sắm điện thoại chính hãng với giá tốt nhất</p>
-        <button className="mt-6 px-6 py-2 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600">
-          Khám phá ngay
-        </button>
-      </section>
-
-      {/* Danh sách sản phẩm */}
-      <section className="container mx-auto py-10 px-6 flex-grow w-full">
-        <h2 className="text-3xl font-bold text-orange-500 text-center mb-6">Sản phẩm nổi bật</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {/* Sản phẩm 1 */}
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <img src="https://via.placeholder.com/150" alt="Điện thoại" className="w-full rounded-lg" />
-            <h3 className="text-lg font-bold mt-4">iPhone 15 Pro Max</h3>
-            <p className="text-orange-400 font-bold mt-2">35.990.000đ</p>
-            <button className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
-              Mua ngay
-            </button>
+      {/* Content */}
+      <Content style={{ background: colorBgContainer }}>
+        {/* Hero Section */}
+        <div
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: '500px',
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative',
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0,0,0,0.5)',
+            }}
+          />
+          <div style={{ padding: '0 48px', position: 'relative', zIndex: 1, width: '100%' }}>
+            <Title style={{ color: 'white', marginBottom: 24 }}>Welcome to Our Electronics Shop</Title>
+            <Paragraph style={{ color: 'white', fontSize: '18px', marginBottom: 32 }}>
+              Discover the latest in technology and electronics. From smartphones to smart home devices,
+              we have everything you need to stay connected and entertained.
+            </Paragraph>
+            <Button type="primary" size="large" onClick={() => navigate('/products')}>
+              Shop Now
+            </Button>
           </div>
-          {/* Thêm các sản phẩm khác tương tự */}
         </div>
-      </section>
+
+        {/* Features Section */}
+        <div style={{ padding: '64px 48px', background: '#f5f5f5' }}>
+          <Title level={2} style={{ textAlign: 'center', marginBottom: 48 }}>Why Choose Us</Title>
+          <Row gutter={[32, 32]}>
+            {features.map((feature, index) => (
+              <Col xs={24} sm={12} md={6} key={index}>
+                <Card style={{ textAlign: 'center', height: '100%' }}>
+                  <div style={{ color: '#1890ff', marginBottom: 16 }}>{feature.icon}</div>
+                  <Title level={4}>{feature.title}</Title>
+                  <Paragraph>{feature.description}</Paragraph>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </div>
+
+        {/* Dynamic Routes */}
+        
+      </Content>
 
       {/* Footer */}
-      <footer className="bg-black py-6 text-center w-full">
-        <p className="text-gray-400">© 2025 PhoneStore. All rights reserved.</p>
-      </footer>
-    </div>
+      <Footer style={{ textAlign: 'center' }}>Shop ©{new Date().getFullYear()} Created by Your Company</Footer>
+    </Layout>
   );
 };
 

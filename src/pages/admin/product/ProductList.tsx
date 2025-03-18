@@ -28,7 +28,7 @@ function ProductList() {
         },
         onSuccess: () => {
             message.success("Xoa thanh cong");
-            queryClient.invalidateQueries(["products"]); 
+            queryClient.invalidateQueries({ queryKey: ["products"] });
         },
         onError: () => {
             message.error("Xoa that bai");
