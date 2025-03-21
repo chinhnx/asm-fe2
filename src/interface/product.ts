@@ -4,6 +4,6 @@ export interface IProduct {
   price: number;
   description: string;
   image: string;
-  category: string;
+  categoryId:string;
   }
   export type IProductForm = Omit<IProduct,"id">

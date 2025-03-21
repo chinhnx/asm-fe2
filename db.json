@@ -1,20 +1,11 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "4K Smart TV",
-      "price": 799.99,
-      "description": "55-inch 4K Ultra HD Smart LED TV with HDR",
-      "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500",
-      "category": "TV & Audio"
-    },
-    {
-      "id": 2,
       "name": "Gaming Laptop",
-      "price": 1299.99,
-      "description": "15.6-inch Gaming Laptop with RTX 3060, 16GB RAM",
-      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
-      "category": "Computers"
+      "select-multiple": [],
+      "stock": 15,
+      "rate": 3.5,
+      "id": 2
     },
     {
       "id": 3,
@@ -22,7 +13,9 @@
       "price": 149.99,
       "description": "True Wireless Earbuds with Active Noise Cancellation",
       "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500",
-      "category": "TV & Audio"
+      "categoryId": "1",
+      "stock": 15,
+      "sold": 3
     },
     {
       "id": 4,
@@ -30,7 +23,9 @@
       "price": 899.99,
       "description": "Latest 5G Smartphone with 128GB Storage",
       "image": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500",
-      "category": "Phones"
+      "categoryId": "1",
+      "stock": 15,
+      "sold": 3
     },
     {
       "id": 5,
@@ -38,7 +33,9 @@
       "price": 599.99,
       "description": "24MP Digital Camera with 4K Video Recording",
       "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500",
-      "category": "Cameras"
+      "categoryId": "1",
+      "stock": 15,
+      "sold": 3
     },
     {
       "id": 6,
@@ -46,36 +43,36 @@
       "price": 299.99,
       "description": "Fitness Tracking Smart Watch with Heart Rate Monitor",
       "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500",
-      "category": "Wearables"
+      "categoryId": "1",
+      "stock": 15,
+      "sold": 3
     }
   ],
   "categories": [
-    [
-      {
-        "id": 1,
-        "name": "Smartphones",
-        "image": "https://example.com/iphone15.png",
-        "description": "Các dòng điện thoại thông minh cao cấp và phổ thông",
-        "createdAt": "2024-03-01T10:00:00Z",
-        "updatedAt": "2024-03-05T12:30:00Z"
-      },
-      {
-        "id": 2,
-        "name": "Laptops",
-        "image": "https://example.com/iphone15.png",
-        "description": "Laptop văn phòng, gaming, đồ họa chuyên nghiệp",
-        "createdAt": "2024-03-02T14:20:00Z",
-        "updatedAt": "2024-03-06T16:45:00Z"
-      },
-      {
-        "id": 3,
-        "name": "Tablets",
-        "image": "https://example.com/iphone15.png",
-        "description": "Máy tính bảng các thương hiệu nổi tiếng",
-        "createdAt": "2024-03-03T09:15:00Z",
-        "updatedAt": "2024-03-07T10:00:00Z"
-      }
-    ]
+    {
+      "id": 1,
+      "name": "Smartphones",
+      "image": "https://example.com/iphone15.png",
+      "description": "Các dòng điện thoại thông minh cao cấp và phổ thông",
+      "createdAt": "2024-03-01T10:00:00Z",
+      "updatedAt": "2024-03-05T12:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Laptops",
+      "image": "https://example.com/iphone15.png",
+      "description": "Laptop văn phòng, gaming, đồ họa chuyên nghiệp",
+      "createdAt": "2024-03-02T14:20:00Z",
+      "updatedAt": "2024-03-06T16:45:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Tablets",
+      "image": "https://example.com/iphone15.png",
+      "description": "Máy tính bảng các thương hiệu nổi tiếng",
+      "createdAt": "2024-03-03T09:15:00Z",
+      "updatedAt": "2024-03-07T10:00:00Z"
+    }
   ],
   "orders": [
     {
