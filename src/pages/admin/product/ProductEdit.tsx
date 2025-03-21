@@ -73,7 +73,7 @@ const ProductEdit = (props: Props) => {
         onSuccess: () => {
             message.success("Cập nhật thành công!");
             queryClient.invalidateQueries({ queryKey: ["products"] });
-            navigate("/product/list");
+            navigate("/admin/product");
         },
         onError: () => {
             message.error("Cập nhật thất bại!");
@@ -110,7 +110,7 @@ const ProductEdit = (props: Props) => {
                     <Option value="usa">U.S.A</Option>
                 </Select>
             </Form.Item>
-            <Form.Item label="Image" name="iamge" rules={[{ required: true }]}>
+            <Form.Item label="Image" name="image" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
             <Form.Item
@@ -123,7 +123,7 @@ const ProductEdit = (props: Props) => {
             <Form.Item
                 name="select-multiple"
                 label="Color"
-                rules={[{ required: true, message: 'Please select your favourite colors!', type: 'array' }]}
+                rules={[{  message: 'Please select your favourite colors!', type: 'array' }]}
             >
                 <Select mode="multiple" placeholder="Please select favourite colors">
                     <Option value="red">Red</Option>
