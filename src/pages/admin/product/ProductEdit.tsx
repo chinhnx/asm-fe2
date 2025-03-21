@@ -61,10 +61,30 @@ const ProductEdit = (props: Props) => {
     });
     console.log({ product });
 
+
+
+    //category
+    const { data: categories } = useQuery({
+        queryKey: ["categories"],
+        queryFn: async () => {
+            const { data } = await axios.get("http://localhost:3000/categories");
+            return data;
+        },
+    });
+
+    // Tạo object map categoryId -> categoryName
+    const categoryMap = categories?.reduce((acc: Record<string, string>, category: Icategory) => {
+        acc[category.id] = category.name;
+        return acc;
+    }, {});
+
     useEffect(() => {
         if (!product) return;
-        form.setFieldsValue(product);
-    }, [product]);
+        form.setFieldsValue({
+            ...product,
+            categoryName: categoryMap?.[product.categoryId] || "Unknown",
+        });
+    }, [product, categories]);
 
     const updateProduct = useMutation({
         mutationFn: async (updatedProduct: any) => {
@@ -79,6 +99,8 @@ const ProductEdit = (props: Props) => {
             message.error("Cập nhật thất bại!");
         },
     });
+
+
 
     const onFinish = (values: any) => {
         updateProduct.mutate(values);
@@ -96,20 +118,25 @@ const ProductEdit = (props: Props) => {
                 'color-picker': null,
             }}
             style={{ maxWidth: 600 }}
+
         ><Form.Item label="Name" name="name" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
+
             <Form.Item
-                name="name"
+                name="categoryId"
                 label="Category"
                 hasFeedback
-                rules={[{ required: true, message: 'Please select your country!' }]}
-            >
-                <Select placeholder="Please select a country">
-                    <Option value="china">China</Option>
-                    <Option value="usa">U.S.A</Option>
+                rules={[{ required: true, message: 'Please select a category!' }]}>
+                <Select placeholder="Select a category">
+                    {categories?.map((category: Icategory) => (
+                        <Option key={category.id} value={category.id}>
+                            {category.name}
+                        </Option>
+                    ))}
                 </Select>
             </Form.Item>
+
             <Form.Item label="Image" name="image" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
@@ -123,7 +150,7 @@ const ProductEdit = (props: Props) => {
             <Form.Item
                 name="select-multiple"
                 label="Color"
-                rules={[{  message: 'Please select your favourite colors!', type: 'array' }]}
+                rules={[{ message: 'Please select your favourite colors!', type: 'array' }]}
             >
                 <Select mode="multiple" placeholder="Please select favourite colors">
                     <Option value="red">Red</Option>

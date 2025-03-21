@@ -1,14 +1,13 @@
 {
   "products": [
     {
-      "id": 1,
       "name": "4K Smart TV",
-      "price": 799.99,
-      "description": "55-inch 4K Ultra HD Smart LED TV with HDR",
+      "categoryId": 1,
       "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500",
-      "categoryId": "1",
+      "price": 799.99,
       "stock": 15,
-      "sold": 3
+      "rate": 3.5,
+      "id": 1
     },
     {
       "id": 2,
