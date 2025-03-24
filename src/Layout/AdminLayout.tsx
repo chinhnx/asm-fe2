@@ -30,8 +30,8 @@ function AdminLayout() {
           <Menu.Item icon={<ShopOutlined />}>
             <Link to="/admin/category">Category List</Link>
           </Menu.Item>
-          <Menu.Item key="/admin/login" icon={<UserOutlined />}>
-          <Link to="/admin/login">Login</Link>
+          <Menu.Item  icon={<UserOutlined />}>
+          <Link to="/admin/user">User</Link>
           </Menu.Item>
         </Menu>
       </Sider>

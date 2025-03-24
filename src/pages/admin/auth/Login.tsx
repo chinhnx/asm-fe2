@@ -23,10 +23,10 @@ function Login() {
       localStorage.setItem("token", accessToken);
       localStorage.setItem("role", user.role);
       notification.success({ message: "Login ok" });
-      if(user.role === "admin"){
-        nav("/admin")
-      }else{
+      if(user.role === "user"){
         nav("/")
+      }else{
+        nav("/admin")
       }
     } catch (error) {
       message.error("Login failed: " + (error as AxiosError).message);
