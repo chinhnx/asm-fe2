@@ -24,14 +24,14 @@ function AdminLayout() {
           <Menu.Item key="/admin" icon={<HomeOutlined />}>
           <Link to="/admin">Dashboard</Link>
           </Menu.Item>
-          <Menu.Item key="/admin/product" icon={<ShopOutlined />}>
+          <Menu.Item  icon={<ShopOutlined />}>
             <Link to="/admin/product">Product List</Link>
           </Menu.Item>
-          <Menu.Item key="/admin/category" icon={<ShopOutlined />}>
+          <Menu.Item icon={<ShopOutlined />}>
             <Link to="/admin/category">Category List</Link>
           </Menu.Item>
-          <Menu.Item key="/admin/register" icon={<UserOutlined />}>
-            Users
+          <Menu.Item  icon={<UserOutlined />}>
+          <Link to="/admin/user">User</Link>
           </Menu.Item>
         </Menu>
       </Sider>
