@@ -16,7 +16,7 @@ import ProductEdit from './pages/admin/product/ProductEdit';
 import CategoryAdd from './pages/admin/category/CategoryAdd';
 import CategoryEdit from './pages/admin/category/CategoryEdit';
 import Register from './pages/admin/auth/Register';
-import { LogIn } from 'lucide-react';
+import Login from './pages/admin/auth/Login';
 
 
 
@@ -45,7 +45,7 @@ const element = useRoutes([
       {path:"category-add",element:<CategoryAdd/>},
       {path:"product-edit/:id",element:<CategoryEdit/>},
       {path:"register",element:<Register/>},
-      {path:"login",element:<LogIn/>}
+      {path:"login",element:<Login/>}
     ]
   }
 ])
