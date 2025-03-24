@@ -20,6 +20,14 @@ function Login() {
       const values = await form.validateFields();
       const { data } = await axios.post("http://localhost:3000/login", values);
       const { accessToken, user } = data;
+      if(user.status === "banned"){
+         notification.error({
+                message: "Login Failed",
+                description: "Tai khoan cua ban da bi khoa.",
+                duration: 5
+            });
+            return;
+      }
       localStorage.setItem("token", accessToken);
       localStorage.setItem("role", user.role);
       notification.success({ message: "Login ok" });
@@ -29,8 +37,10 @@ function Login() {
         nav("/admin")
       }
     } catch (error) {
+      
       message.error("Login failed: " + (error as AxiosError).message);
     }
+
 
     
 
