@@ -10,12 +10,32 @@ function UserList() {
 
     const getAllUser = async () => {
         const { data } = await axios.get("http://localhost:3000/users");
-        return data.map((user: any, index: number) => ({
+
+        const sortedUsers = data.sort((a: any, b: any) => (a.role === "admin" ? -1 : 1));
+
+        return sortedUsers.map((user: any, index: number) => ({
             ...user,
-            key: user.id || `category-${index}`,
+            key: user.id || `user-${index}`,
         }));
     };
-    
+    //     Sắp xếp danh sách user (data.sort(...))
+
+    // sort() sẽ sắp xếp lại danh sách user dựa vào giá trị role.
+
+    // Nếu a.role === "admin", nó sẽ đưa user đó lên đầu (return -1).
+
+    // Nếu không, user sẽ được đưa xuống sau (return 1).
+
+    // ➡ Kết quả: Admin sẽ luôn đứng đầu danh sách.
+
+    // Gán key cho từng user (map(...))
+
+    // .map() chạy qua từng user và thêm thuộc tính key (dùng cho React).
+
+    // Nếu user có id, dùng luôn id làm key.
+
+    // Nếu không có id, tạo key dạng "user-<index>".
+
     const { data, isLoading } = useQuery({
         queryKey: ["users"],
         queryFn: getAllUser,
@@ -66,6 +86,14 @@ function UserList() {
             title: "Status",
             dataIndex: "status",
             key: "status",
+            render: (status: string) => (
+                <span style={{
+                    color: status === "active" ? "green" : "red",
+                    fontWeight: "bold"
+                }}>
+                    {status.toUpperCase()}
+                </span>
+            ),
         },
         {
             title: "Action",
@@ -74,7 +102,7 @@ function UserList() {
             render: (record: any) => (
                 <div>
                     <Button type="primary">
-                        <Link to={`/admin/product-edit/${record.id}`}>Edit</Link>
+                        <Link to={`/admin/user-edit/${record.id}`}>Edit</Link>
                     </Button>
                 </div>
             ),

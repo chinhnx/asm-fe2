@@ -108,26 +108,22 @@
   ],
   "users": [
     {
-      "id": 1,
       "name": "Nguyễn Văn A",
       "email": "nguyenvana@example.com",
-      "password": "hashed_password",
+      "password": "$2a$10$J1oK6n70hRSIjwr3gQGv3u02c.BnxWZQEwSYh69AFC0DBxsep5Wnu",
       "phone": "0987654321",
-      "address": "123 Đường ABC, Hà Nội",
+      "status": "banned",
       "role": "user",
-      "status": "active",
-      "createdAt": "2024-03-01T12:00:00Z",
-      "updatedAt": "2024-03-05T08:30:00Z"
+      "id": 1
     },
     {
-      "email": "lam15081999@gmail.com",
       "name": "Nguyễn Văn B",
-      "password": "$2a$10$tjAY.tuLLzeyrD.Nhyo6x.m8kcbsDkMGTu7ojLx.POMIqajShIgUi",
-      "id": 2,
-      "role": "user",
+      "email": "lam15081999@gmail.com",
+      "password": "$2a$10$kijKw84qh6Wqgoadm.VmR.4W7bcbQ9SGTJodRUXZ23ziqRaju4mwa",
+      "phone": "0915656298",
       "status": "active",
-      "createdAt": "2024-03-01T12:00:00Z",
-      "updatedAt": "2024-03-05T08:30:00Z"
+      "role": "user",
+      "id": 2
     },
     {
       "email": "lam1508@gmail.com",
