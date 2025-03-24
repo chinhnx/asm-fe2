@@ -1,17 +1,39 @@
 import { Button, Form, Input, message, notification } from "antd";
 import axios, { AxiosError } from "axios";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [form] = Form.useForm();
+
+  const nav = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      nav("/");
+    }
+  }, []);
+
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      const { data } = await axios.post("/login", values);
-      localStorage.setItem("token", data.accessToken);
+      const { data } = await axios.post("http://localhost:3000/login", values);
+      const { accessToken, user } = data;
+      localStorage.setItem("token", accessToken);
+      localStorage.setItem("role", user.role);
       notification.success({ message: "Login ok" });
+      if(user.role === "admin"){
+        nav("/admin")
+      }else{
+        nav("/")
+      }
     } catch (error) {
       message.error("Login failed: " + (error as AxiosError).message);
     }
+
+    
+
   };
   return (
     <Form form={form} onFinish={handleSubmit} layout="vertical">

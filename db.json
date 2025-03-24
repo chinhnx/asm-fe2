@@ -113,12 +113,32 @@
       "email": "nguyenvana@example.com",
       "password": "hashed_password",
       "phone": "0987654321",
-      "address": "123 Đường ABC, Hà Nội"
+      "address": "123 Đường ABC, Hà Nội",
+      "role": "user",
+      "status": "active",
+      "createdAt": "2024-03-01T12:00:00Z",
+      "updatedAt": "2024-03-05T08:30:00Z"
     },
     {
       "email": "lam15081999@gmail.com",
-      "password": "$2a$10$ME971pRXRCcUBdY4lriVDOV/3cpJDcovMV7VeKxsebgc0LuZ5t.oe",
-      "id": 2
+      "name": "Nguyễn Văn B",
+      "password": "$2a$10$tjAY.tuLLzeyrD.Nhyo6x.m8kcbsDkMGTu7ojLx.POMIqajShIgUi",
+      "id": 2,
+      "role": "user",
+      "status": "active",
+      "createdAt": "2024-03-01T12:00:00Z",
+      "updatedAt": "2024-03-05T08:30:00Z"
+    },
+    {
+      "email": "lam1508@gmail.com",
+      "password": "$2a$10$tjAY.tuLLzeyrD.Nhyo6x.m8kcbsDkMGTu7ojLx.POMIqajShIgUi",
+      "name": "lam 123",
+      "phone": "0915656298",
+      "id": 3,
+      "role": "admin",
+      "status": "active",
+      "createdAt": "2024-03-01T12:00:00Z",
+      "updatedAt": "2024-03-05T08:30:00Z"
     }
   ]
 }
