@@ -26,6 +26,11 @@ const items: MenuItem[] = [
     icon: <ShoppingCart size={16} />,
     label: <Link to="/cart">Cart</Link>,
   },
+  {
+    key: 'Login',
+    icon: <ShoppingCart size={16} />,
+    label: <Link to="/login">Login</Link>,
+  },
 ];
 
 function Client() {

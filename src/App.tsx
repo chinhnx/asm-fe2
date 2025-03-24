@@ -17,6 +17,8 @@ import CategoryAdd from './pages/admin/category/CategoryAdd';
 import CategoryEdit from './pages/admin/category/CategoryEdit';
 import Register from './pages/admin/auth/Register';
 import Login from './pages/admin/auth/Login';
+import UserList from './pages/admin/user/UserList';
+import UserEdit from './pages/admin/user/UserEdit';
 
 
 
@@ -32,7 +34,9 @@ const element = useRoutes([
       path:"products",element:<Product/>
     },
     {path:"product/:id", element:<ProductDetail/>},
-    {path:"cart", element:<Cart/>}
+    {path:"cart", element:<Cart/>},
+    {path:"login",element:<Login/>},
+    {path:"register",element:<Register/>}
 
   ]},
   {
@@ -44,8 +48,9 @@ const element = useRoutes([
       {path:"category",element:<CategoryList/>},
       {path:"category-add",element:<CategoryAdd/>},
       {path:"product-edit/:id",element:<CategoryEdit/>},
-      {path:"register",element:<Register/>},
-      {path:"login",element:<Login/>}
+      {path:"user",element:<UserList/>},
+      {path:"user-edit/:id",element:<UserEdit/>},
+
     ]
   }
 ])
