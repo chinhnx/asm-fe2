@@ -1,34 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Table, Button, InputNumber, Empty, Card, Space } from 'antd';
 import { Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from './CartContext'; // Import useCart
 
 const { Title } = Typography;
 
-// Mock cart data - replace with real data later
-const cartItems = [
-  {
-    id: 1,
-    name: "4K Smart TV",
-    price: 799.99,
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500"
-  },
-  {
-    id: 2,
-    name: "Gaming Laptop",
-    price: 1299.99,
-    quantity: 1,
-    image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500"
-  }
-];
-
 const Cart: React.FC = () => {
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    alert("Redirecting to payment gateway...");
+    clearCart();
+    navigate("/checkout"); // Chuyển đến trang thanh toán
+  };
+
+  const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
   const columns = [
     {
       title: 'Product',
       dataIndex: 'name',
       key: 'name',
-      render: (text: string, record: any) => (
+      render: (text:any, record:any) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <img 
             src={record.image} 
@@ -43,51 +38,49 @@ const Cart: React.FC = () => {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
-      render: (price: number) => `$${price.toFixed(2)}`,
+      render: (price:number) => `$${price.toFixed(2)}`,
     },
     {
       title: 'Quantity',
       dataIndex: 'quantity',
       key: 'quantity',
-      render: (quantity: number) => (
+      render: (_:any, record:any) => (
         <InputNumber 
           min={1} 
           max={10} 
-          defaultValue={quantity} 
-          onChange={(value) => console.log(value)}
+          value={record.quantity}
+          onChange={(value) => updateQuantity(record.id, value)}
         />
       ),
     },
     {
       title: 'Total',
       key: 'total',
-      render: (record: any) => `$${(record.price * record.quantity).toFixed(2)}`,
+      render: (record:any) => `$${(record.price * record.quantity).toFixed(2)}`,
     },
     {
       title: 'Action',
       key: 'action',
-      render: () => (
+      render: (_:any, record:any) => (
         <Button 
           type="text" 
           danger 
           icon={<Trash2 size={16} />}
-          onClick={() => console.log('Remove item')}
+          onClick={() => removeFromCart(record.id)}
         />
       ),
     },
   ];
 
-  const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
   return (
     <div style={{ padding: '24px 48px' }}>
       <Title level={1}>Shopping Cart</Title>
       
-      {cartItems.length > 0 ? (
+      {cart.length > 0 ? (
         <>
           <Table 
             columns={columns} 
-            dataSource={cartItems}
+            dataSource={cart}
             pagination={false}
             rowKey="id"
           />
@@ -110,10 +103,10 @@ const Cart: React.FC = () => {
               </div>
               
               <Space direction="vertical" style={{ width: '100%' }}>
-                <Button type="primary" block size="large">
-                  Proceed to Checkout
+                <Button type="primary" block size="large" onClick={handleCheckout}>
+                  Checkout
                 </Button>
-                <Button block>
+                <Button block onClick={() => navigate('/products')}>
                   Continue Shopping
                 </Button>
               </Space>
@@ -125,7 +118,7 @@ const Cart: React.FC = () => {
           description="Your cart is empty"
           style={{ margin: '48px 0' }}
         >
-          <Button type="primary" size="large">
+          <Button type="primary" size="large" onClick={() => navigate('/products')}>
             Start Shopping
           </Button>
         </Empty>

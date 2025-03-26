@@ -19,6 +19,7 @@ import Register from './pages/admin/auth/Register';
 import Login from './pages/admin/auth/Login';
 import UserList from './pages/admin/user/UserList';
 import UserEdit from './pages/admin/user/UserEdit';
+import { CartProvider } from './pages/client/CartContext';
 
 
 
@@ -33,7 +34,7 @@ const element = useRoutes([
     {
       path:"products",element:<Product/>
     },
-    {path:"product/:id", element:<ProductDetail/>},
+    {path:"products/:id", element:<ProductDetail/>},
     {path:"cart", element:<Cart/>},
     {path:"login",element:<Login/>},
     {path:"register",element:<Register/>}
@@ -56,9 +57,12 @@ const element = useRoutes([
 ])
 
   return (
+    
+     <CartProvider>  {/* Bọc toàn bộ ứng dụng trong CartProvider */}
     <div>
       {element}
     </div>
+   </CartProvider>
   );
 }
 
