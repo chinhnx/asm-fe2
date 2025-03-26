@@ -81,7 +81,7 @@ function CategoryList() {
             render: (record: any) => (
                 <div>
                     <Button type="primary">
-                        <Link to={`/admin/product-edit/${record.id}`}>Edit</Link>
+                        <Link to={`/admin/category-edit/${record.id}`}>Edit</Link>
                     </Button>
                     <Button type="primary" danger onClick={() => confirmDelete(record.id)}>
                         Delete
@@ -97,7 +97,7 @@ function CategoryList() {
     return (
         <div>
             <Button
-                style={{ marginBottom: 16, backgroundColor: "green", borderColor: "green", color: "white" }}
+                style={{ marginBottom: 16, backgroundColor: "#4a88e9",  color: "white" }}
                 onClick={() => nav("/admin/category-add")}
             >
                 Them danh muc

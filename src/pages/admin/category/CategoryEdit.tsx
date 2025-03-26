@@ -1,52 +1,75 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
-import { IProductForm } from '../../../interface/product'
-import { IcategoryForm } from '../../../interface/category'
+import { Button, Form, Input, InputNumber, message, Space } from "antd";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useOne, useUpdate } from "../../../hooks";
 
-type Props = {}
+function CategoryEdit() {
+    const nav = useNavigate();
+    const formItemLayout = {
+        labelCol: { span: 6 },
+        wrapperCol: { span: 14 },
+    };
+    // get data category theo id
+    const { id } = useParams();
+    const [form] = Form.useForm();
 
-const CategoryEdit = (props: Props) => {
-  const {register,handleSubmit,reset} = useForm<IcategoryForm>()
-  // Lấy id sản phẩm
-  const params:any = useParams()
-  const id = params.id
-  useEffect(()=>{
-      const get_product_by_id = async()=>{
-          try {                
-              const {data} = await axios.get(`http://localhost:3000/category/${id}`)
-              reset(data)
-          } catch (error) {
-              console.log(error);
-              
-          }
-      }
-      get_product_by_id()
-  },[])
-  const navigate = useNavigate()
-  const onSubmit = async (category:IcategoryForm)=>{
-      try {
-          const {data} = await axios.put(`http://localhost:3000/category/${id}`,category)
-          console.log(data);
-          alert('Cập nhật thành công')
-          navigate('/admin/category')
-      } catch (error) {
-          console.log(error);            
-      }
-  }
-return (
-  <div className='max-w-2xl mx-auto py-10'>
-      <h1 className='font-bold text-[24px] text-center'>Cập nhật danh muc</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4 mt-4 [&_input]:border [&_input]:py-1 [&_input]:px-3'>
-          <input {...register("name")} type='text' placeholder='Tên danh muc'/>
-          <input {...register("image")} type='text' placeholder='Ảnh danh muc'/>
-          <div className='flex justify-end'>
-          <button className='bg-green-900 text-white py-1 px-4 rounded'>Cập nhật danh muc</button>
-          </div>
-      </form>
-  </div>
-)
+    const { data: category } = useOne({ resource: "categories", id });
+
+    useEffect(() => {
+        if (!category) return;
+        form.setFieldsValue(category);
+    }, [category]);
+
+    const { mutate } = useUpdate({ resource: "categories", id });
+
+    function onFinish(values: any) {
+        mutate(values);
+        nav("/admin/category");
+
+    }
+    return (
+        <div>
+            <Form
+                name="validate_other"
+                {...formItemLayout}
+                form={form} 
+                onFinish={onFinish}
+                initialValues={{
+                    'input-number': 3,
+                    'checkbox-group': ['A', 'B'],
+                    rate: 3.5,
+                    'color-picker': null,
+                }}
+                style={{ maxWidth: 600 }}
+
+            ><Form.Item label="Name" name="name" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+
+
+                <Form.Item label="Image" name="image" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Description"
+                    name="description"
+                    rules={[{ required: true }]}
+                >
+                    <Input />
+                </Form.Item>
+
+
+                <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+                    <Space>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                        <Button htmlType="reset">reset</Button>
+                    </Space>
+                </Form.Item>
+            </Form>
+        </div>
+    );
 }
 
-export default CategoryEdit
+export default CategoryEdit;
