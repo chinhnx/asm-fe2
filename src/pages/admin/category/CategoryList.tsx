@@ -98,9 +98,9 @@ function CategoryList() {
         <div>
             <Button
                 style={{ marginBottom: 16, backgroundColor: "green", borderColor: "green", color: "white" }}
-                onClick={() => nav("/admin/product-add")}
+                onClick={() => nav("/admin/category-add")}
             >
-                Them san pham
+                Them danh muc
             </Button>
             <Table dataSource={data} columns={columns} loading={isLoading} />;
         </div>
