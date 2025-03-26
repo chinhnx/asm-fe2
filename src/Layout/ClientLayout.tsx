@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import "antd/dist/reset.css";
 import Sider from 'antd/es/layout/Sider';
-import { AppstoreOutlined, HomeOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons'
-import { Home, ShoppingBag, ShoppingCart } from 'lucide-react';
+import { AppstoreOutlined, HomeOutlined, LoginOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons'
+import { BadgeInfo, Home, LogInIcon, ShoppingBag, ShoppingCart } from 'lucide-react';
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -21,6 +21,16 @@ const items: MenuItem[] = [
     icon: <ShoppingBag size={16} />,
     label: <Link to="/products">Products</Link>,
   },
+  
+  // {
+  //   key: 'category',
+  //   icon: <ShoppingCart size={16} />,
+  //   label: <Link to="/category">Category</Link>,
+  // },
+ 
+];
+const items2: MenuItem[] = [
+  
   {
     key: 'cart',
     icon: <ShoppingCart size={16} />,
@@ -28,7 +38,7 @@ const items: MenuItem[] = [
   },
   {
     key: 'Login',
-    icon: <ShoppingCart size={16} />,
+    icon: <LoginOutlined size={16} />,
     label: <Link to="/login">Login</Link>,
   },
 ];
@@ -48,18 +58,28 @@ function Client() {
     <div>
       <Layout>
         {/* header */}
-        <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%', display: 'flex', alignItems: 'center' }}>
-          <div className="demo-logo" style={{ color: 'white', marginRight: '24px', fontSize: '20px', fontWeight: 'bold' }}>
-            SHOP
-          </div>
-          <Menu
+        <Header style={{ position: 'sticky', top: 0, zIndex: 1000, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="demo-logo" style={{ color: 'white', marginRight: '24px', fontSize: '20px', fontWeight: 'bold', display: 'flex', gap: 20 }}>
+            <div>SHOP</div>
+            <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['/']}
             items={items}
             onClick={handleMenuClick}
+            style={{ flex: 1, minWidth: 1000 }}
+          />  
+          </div>
+          <div>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            // defaultSelectedKeys={['/']}
+            items={items2}
+            onClick={handleMenuClick}
             style={{ flex: 1, minWidth: 0 }}
           />
+          </div>
         </Header>
 
         {/* content */}
