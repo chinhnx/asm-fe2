@@ -20,12 +20,7 @@ function CategoryAdd() {
         nav("/admin/category");
     }
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 30,
-            }}>
+        <div>
             <Form
                 name="validate_other"
                 {...formItemLayout}
