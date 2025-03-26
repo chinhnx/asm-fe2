@@ -23,14 +23,14 @@ function CategoryList() {
         queryFn: getAllCategory,
     });
 
-    // Mutation xoa san pham
-    const deleteProduct = useMutation({
+    // Mutation xoa danh muc
+    const deleteCategory = useMutation({
         mutationFn: async (id: Icategory) => {
-            await axios.delete(`http://localhost:3000/products/${id}`);
+            await axios.delete(`http://localhost:3000/categories/${id}`);
         },
         onSuccess: () => {
             message.success("Xoa thanh cong");
-            queryClient.invalidateQueries({ queryKey: ["products"] });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
         },
         onError: () => {
             message.error("Xoa that bai");
@@ -46,7 +46,7 @@ function CategoryList() {
             okText: "Xóa",
             okType: "danger",
             cancelText: "Hủy",
-            onOk: () => deleteProduct.mutate(id),
+            onOk: () => deleteCategory.mutate(id),
         });
     };
 
