@@ -121,7 +121,7 @@ function ProductList() {
     return (
         <div>
             <Button
-                style={{ marginBottom: 16, backgroundColor: "green", borderColor: "green", color: "white" }}
+                style={{ marginBottom: 16, backgroundColor: "#4a88e9", color: "white" }}
                 onClick={() => nav("/admin/product-add")}
             >
                 Them san pham
