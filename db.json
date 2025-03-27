@@ -1,15 +1,6 @@
 {
   "products": [
     {
-      "name": "4K Smart TV",
-      "categoryId": 1,
-      "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500",
-      "price": 799.99,
-      "stock": 15,
-      "rate": 3.5,
-      "id": 1
-    },
-    {
       "id": 2,
       "name": "Gaming Laptop",
       "price": 1299.99,
@@ -135,6 +126,24 @@
       "status": "active",
       "createdAt": "2024-03-01T12:00:00Z",
       "updatedAt": "2024-03-05T08:30:00Z"
+    },
+    {
+      "name": "nguyễn chỉnh",
+      "email": "xuanchinhn48@gmail.com",
+      "password": "$2a$10$lNtx4wLgPcmGA58Yv9uwyOW4nNtD.0/TbCgXNw0cHU.uie2d7lZga",
+      "phone": "0918946104",
+      "status": "active",
+      "role": "user",
+      "id": 4
+    },
+    {
+      "name": "nguyễn chỉnh",
+      "email": "chinhdzai2810@gmail.com",
+      "password": "$2a$10$lvuikvdBclRN.Nu6vrd.WO1C2daLJSA5RVwaKwftXa87GR0QVtwR.",
+      "phone": "0918946104",
+      "status": "banned",
+      "role": "user",
+      "id": 5
     }
   ]
 }
