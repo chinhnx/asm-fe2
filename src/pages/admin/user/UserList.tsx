@@ -1,5 +1,5 @@
-import { Image, Table, Button } from "antd";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Image, Table, Button, message, Modal } from "antd";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -41,6 +41,22 @@ function UserList() {
         queryFn: getAllUser,
     });
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        nav("/login"); 
+    };
+    const confirmLogout = ()=>{
+        Modal.confirm({
+            title: "Xác nhận xóa",
+            content: "Bạn có chắc chắn muốn đăng xuất",
+            okText: "Có",
+            okType: "danger",
+            cancelText: "Hủy",
+            onOk: handleLogout
+        });
+
+    }
 
 
 
@@ -113,7 +129,11 @@ function UserList() {
         <div>
             <h1>Danh sach tai khoan</h1>
             <Table dataSource={data} columns={columns} loading={isLoading} />;
+            <Button type="primary" danger onClick={confirmLogout} style={{ marginBottom: 16 }}>
+                Đăng xuất
+            </Button>
         </div>
+        
     )
 }
 

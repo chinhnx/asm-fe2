@@ -33,7 +33,7 @@ const element = useRoutes([
     {
       path:"products",element:<Product/>
     },
-    {path:"product/:id", element:<ProductDetail/>},
+    {path:"products/:id", element:<ProductDetail/>},
     {path:"cart", element:<Cart/>},
     {path:"login",element:<Login/>},
     {path:"register",element:<Register/>}
@@ -47,7 +47,7 @@ const element = useRoutes([
       {path:"product-edit/:id",element:<ProductEdit/>},
       {path:"category",element:<CategoryList/>},
       {path:"category-add",element:<CategoryAdd/>},
-      {path:"product-edit/:id",element:<CategoryEdit/>},
+      {path:"category-edit/:id",element:<CategoryEdit/>},
       {path:"user",element:<UserList/>},
       {path:"user-edit/:id",element:<UserEdit/>},
 
@@ -56,9 +56,12 @@ const element = useRoutes([
 ])
 
   return (
+    
+     
     <div>
       {element}
     </div>
+   
   );
 }
 
