@@ -23,14 +23,14 @@ function CategoryList() {
         queryFn: getAllCategory,
     });
 
-    // Mutation xoa san pham
-    const deleteProduct = useMutation({
+    // Mutation xoa danh muc
+    const deleteCategory = useMutation({
         mutationFn: async (id: Icategory) => {
-            await axios.delete(`http://localhost:3000/products/${id}`);
+            await axios.delete(`http://localhost:3000/categories/${id}`);
         },
         onSuccess: () => {
             message.success("Xoa thanh cong");
-            queryClient.invalidateQueries({ queryKey: ["products"] });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
         },
         onError: () => {
             message.error("Xoa that bai");
@@ -46,7 +46,7 @@ function CategoryList() {
             okText: "Xóa",
             okType: "danger",
             cancelText: "Hủy",
-            onOk: () => deleteProduct.mutate(id),
+            onOk: () => deleteCategory.mutate(id),
         });
     };
 
@@ -81,7 +81,7 @@ function CategoryList() {
             render: (record: any) => (
                 <div>
                     <Button type="primary">
-                        <Link to={`/admin/product-edit/${record.id}`}>Edit</Link>
+                        <Link to={`/admin/category-edit/${record.id}`}>Edit</Link>
                     </Button>
                     <Button type="primary" danger onClick={() => confirmDelete(record.id)}>
                         Delete
@@ -97,10 +97,10 @@ function CategoryList() {
     return (
         <div>
             <Button
-                style={{ marginBottom: 16, backgroundColor: "green", borderColor: "green", color: "white" }}
-                onClick={() => nav("/admin/product-add")}
+                style={{ marginBottom: 16, backgroundColor: "#4a88e9",  color: "white" }}
+                onClick={() => nav("/admin/category-add")}
             >
-                Them san pham
+                Them danh muc
             </Button>
             <Table dataSource={data} columns={columns} loading={isLoading} />;
         </div>

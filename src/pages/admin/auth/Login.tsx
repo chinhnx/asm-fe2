@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, notification } from "antd";
+import { Button, Col, Form, Input, message, notification, Row } from "antd";
 import axios, { AxiosError } from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -46,25 +46,32 @@ function Login() {
 
   };
   return (
-    <Form form={form} onFinish={handleSubmit} layout="vertical">
-      <Form.Item
-        name="email"
-        label="Email"
-        rules={[{ required: true, type: "email" }]}
-      >
-        <Input type="email" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label="Password"
-        rules={[{ required: true, min: 6 }]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form>
+    <Row justify="center"  style={{ height: "100vh", marginTop:"50px" }}>
+    <Col span={8}>
+      <h1 style={{ textAlign: "center", color: "blue", fontSize: "24px", fontWeight: "bold" }}>
+        Đăng nhập
+      </h1>
+      <Form form={form} onFinish={handleSubmit} layout="vertical">
+        <Form.Item
+          name="email"
+          label="Email"
+          rules={[{ required: true, type: "email" }]}
+        >
+          <Input type="email" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[{ required: true, min: 6 }]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <Button type="primary" htmlType="submit" block>
+          Submit
+        </Button>
+      </Form>
+    </Col>
+  </Row>
   );
 }
 
