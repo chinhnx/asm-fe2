@@ -1,5 +1,6 @@
 import { Button, Col, Form, Input, message, notification, Row } from "antd";
 import axios, { AxiosError } from "axios";
+import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +21,8 @@ function Login() {
       const values = await form.validateFields();
       const { data } = await axios.post("http://localhost:3000/login", values);
       const { accessToken, user } = data;
+      const decodedToken: any = jwtDecode(accessToken);
+      console.log(decodedToken);
       if(user.status === "banned"){
          notification.error({
                 message: "Login Failed",

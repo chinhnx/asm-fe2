@@ -137,13 +137,20 @@
       "id": 4
     },
     {
-      "name": "nguyễn chỉnh",
-      "email": "chinhdzai2810@gmail.com",
-      "password": "$2a$10$lvuikvdBclRN.Nu6vrd.WO1C2daLJSA5RVwaKwftXa87GR0QVtwR.",
+      "email": "chinhnxph@gmail.com",
+      "password": "$2a$10$RwswPx.AFBzCUlULGZ6aLu2YMORan.2Mo6LxdPOZpuTbSIElIKmZm",
       "phone": "0918946104",
-      "status": "banned",
       "role": "user",
-      "id": 5
+      "status": "active",
+      "id": 6
+    },
+    {
+      "email": "bang@gmail.com",
+      "password": "$2a$10$rzd.zV.GcZyqLLG3La12A.Tp9DuGssrsA0K.EcZzxfJ85ZdRmc0DC",
+      "phone": "0989376878",
+      "role": "user",
+      "status": "active",
+      "id": 7
     }
   ]
 }
