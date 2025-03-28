@@ -3,7 +3,7 @@ import { Content, Footer, Header } from 'antd/es/layout/layout';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Home, ShoppingBag, ShoppingCart, UserCircle } from 'lucide-react';
-import { LoginOutlined } from '@ant-design/icons';
+import { LoginOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -12,11 +12,9 @@ function Client() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check localStorage for user data on component mount
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
 
-    // Add event listener for storage changes
     const handleStorageChange = () => {
       const userData = localStorage.getItem('token');
       setIsLoggedIn(!!userData);
@@ -36,6 +34,16 @@ function Client() {
       key: 'products',
       icon: <ShoppingBag size={16} />,
       label: <Link to="/products">Products</Link>,
+    },
+    {
+      key: 'category',
+      icon: <AppstoreOutlined />,
+      label: 'Danh mục',
+      children: [
+        { key: 'category/smartphone', label: <Link to="/category/smartphone">Smartphone</Link> },
+        { key: 'category/laptops', label: <Link to="/category/laptops">Laptops</Link> },
+        { key: 'category/tablet', label: <Link to="/category/tablet">Tablet</Link> },
+      ],
     },
   ];
 

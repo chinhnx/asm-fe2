@@ -18,6 +18,7 @@ import UserList from "./pages/admin/user/UserList";
 import UserEdit from "./pages/admin/user/UserEdit";
 import { Navigate } from "react-router-dom";
 import Profile from "./pages/client/Profile";
+import CategoryPage from "./pages/client/CategoryPage";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -41,7 +42,9 @@ function App() {
         { path: "cart", element: <Cart /> },
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
-        { path : "profile", element:<Profile/>}
+        { path : "profile", element:<Profile/>},
+        { path: "category/:categoryType", element: <CategoryPage /> },
+        
       ],
     },
     {

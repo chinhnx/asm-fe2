@@ -1,23 +1,28 @@
-import  { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Card, Modal, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
+// Hàm lấy dữ liệu user từ localStorage
+const fetchUser = async () => {
+  const userData = localStorage.getItem("user");
+  return userData ? JSON.parse(userData) : null;
+};
+
 const Profile = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<{ name: string; email: string; phone: string } | null>(null);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    // Lấy dữ liệu user từ localStorage
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData)); // Chuyển JSON thành Object
-    }
-  }, []);
+  // Sử dụng React Query để lấy dữ liệu user
+  const { data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: fetchUser,
+  });
 
   const handleLogout = () => {
     localStorage.clear();
+    queryClient.invalidateQueries({ queryKey: ["user"] }); 
     navigate("/login");
     window.location.reload();
   };
