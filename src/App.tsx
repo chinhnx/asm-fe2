@@ -19,6 +19,7 @@ import UserEdit from "./pages/admin/user/UserEdit";
 import { Navigate } from "react-router-dom";
 import Profile from "./pages/client/Profile";
 import CategoryPage from "./pages/client/CategoryPage";
+import Checkout from "./pages/client/Checkout";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -40,6 +41,7 @@ function App() {
         },
         { path: "products/:id", element: <ProductDetail /> },
         { path: "cart", element: <Cart /> },
+        { path: "checkout", element: <Checkout /> },
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
         { path : "profile", element:<Profile/>},
