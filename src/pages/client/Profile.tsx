@@ -1,6 +1,6 @@
 import  { useEffect, useState } from "react";
 import { Button, Card, Modal, Typography } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
@@ -51,6 +51,9 @@ const Profile = () => {
         ) : (
           <Text type="danger">Không có dữ liệu người dùng</Text>
         )}
+         <Button type="primary"  style={{ marginTop: 16 }}>
+         <Link to="/order">  Don hàng</Link>
+        </Button>
         <Button type="primary" danger onClick={confirmLogout} style={{ marginTop: 16 }}>
           Đăng xuất
         </Button>

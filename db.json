@@ -89,7 +89,7 @@
         }
       ],
       "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
+      "status": "Đang xử lý",
       "id": 1
     }
   ],
@@ -156,6 +156,15 @@
       "role": "user",
       "status": "active",
       "id": 8
+    },
+    {
+      "email": "trueman22005@gmail.com",
+      "password": "$2a$10$UFVRCpP5gzh42g3gpVcq2ubgTzyg7ni2kzq.vd1j4uScrbP1L64SC",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "role": "user",
+      "status": "active",
+      "id": 9
     }
   ]
 }
