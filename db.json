@@ -1,14 +1,13 @@
 {
   "products": [
     {
-      "id": 2,
       "name": "Gaming Laptop",
-      "price": 1299.99,
-      "description": "15.6-inch Gaming Laptop with RTX 3060, 16GB RAM",
-      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
       "categoryId": "1",
+      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
+      "price": 1299.99,
       "stock": 15,
-      "sold": 3
+      "rate": 5,
+      "id": 2
     },
     {
       "id": 3,
