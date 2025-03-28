@@ -80,9 +80,7 @@ function UserEdit() {
             <Form.Item label="Email" name="email" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
-            <Form.Item label="Password" name="password" rules={[{ required: true }]}>
-                <Input.Password  />
-            </Form.Item>
+
             <Form.Item label="Phone" name="phone">
                 <Input />
             </Form.Item>

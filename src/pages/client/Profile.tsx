@@ -14,7 +14,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // Sử dụng React Query để lấy dữ liệu user
   const { data: user } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,
