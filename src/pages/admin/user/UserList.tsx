@@ -41,24 +41,6 @@ function UserList() {
         queryFn: getAllUser,
     });
 
-    const handleLogout = () => {
-        localStorage.clear();
-        nav("/login"); 
-    };
-    const confirmLogout = ()=>{
-        Modal.confirm({
-            title: "Xác nhận xóa",
-            content: "Bạn có chắc chắn muốn đăng xuất",
-            okText: "Có",
-            okType: "danger",
-            cancelText: "Hủy",
-            onOk: handleLogout
-        });
-
-    }
-
-
-
     const columns = [
         {
             title: "Name",
@@ -128,9 +110,6 @@ function UserList() {
         <div>
             <h1>Danh sach tai khoan</h1>
             <Table dataSource={data} columns={columns} loading={isLoading} />;
-            <Button type="primary" danger onClick={confirmLogout} style={{ marginBottom: 16 }}>
-                Đăng xuất
-            </Button>
         </div>
         
     )
