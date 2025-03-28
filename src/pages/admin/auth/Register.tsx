@@ -38,6 +38,15 @@ function Register() {
           Đăng ký
         </h1>
         <Form form={form} onFinish={handleSubmit} layout="vertical">
+        <Form.Item
+            name="name"
+            label="Tên"
+            rules={[
+              { required: true, message:"vui lòng nhập tên"},
+            ]}
+          >
+            <Input type="text" />
+          </Form.Item>
           <Form.Item
             name="email"
             label="Email"

@@ -42,8 +42,7 @@ function UserList() {
     });
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
+        localStorage.clear();
         nav("/login"); 
     };
     const confirmLogout = ()=>{
