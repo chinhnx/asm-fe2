@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Card, Modal, Typography, Table, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useList } from "../../../hooks";
+import { useList } from "../../hooks";
 
-const OrderList = () => {
+const Order = () => {
   const { data, isLoading } = useList({ resource: "orders" });
 
 
@@ -33,4 +33,4 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default Order;
