@@ -46,9 +46,12 @@ function AdminLayout() {
           </Menu.Item>
           <Menu.Item icon={<ShopOutlined />}>
             <Link to="/admin/product">Product List</Link>
-          </Menu.Item>
+          </Menu.Item>                    
           <Menu.Item icon={<ShopOutlined />}>
             <Link to="/admin/category">Category List</Link>
+          </Menu.Item>
+          <Menu.Item icon={<ShopOutlined />}>
+            <Link to="/admin/order">Order List</Link>
           </Menu.Item>
           <Menu.Item icon={<UserOutlined />}>
             <Link to="/admin/user">User</Link>

@@ -36,11 +36,52 @@ const Cart: React.FC = () => {
       return updatedCart;
     });
   };
-  const handleCheckout = () => {
-    alert("Redirecting to payment gateway...");
-    localStorage.removeItem("cart");
-    setCart([]);
-    navigate("/checkout");
+
+  const handleConfirm = async () => {
+    if (cart.length === 0) {
+      alert("Giỏ hàng trống!");
+      return;
+    }
+
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    if (!user.id) {
+      alert("Bạn chưa đăng nhập!");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/carts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user.id, 
+          items: cart.map(item => ({
+            productId: item.id,
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            quantity: item.quantity,
+            total: item.price * item.quantity
+          })),
+          total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+          createdAt: new Date().toISOString()
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Lỗi khi lưu giỏ hàng");
+      }
+      // Xóa giỏ hàng sau khi đặt hàng thành công
+      localStorage.removeItem("cart");
+      setCart([]);
+
+      navigate("/checkout");
+    } catch (error) {
+      console.error("Lỗi đặt hàng:", error);
+      alert("Đặt hàng thất bại!");
+    }
   };
 
   const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -50,7 +91,7 @@ const Cart: React.FC = () => {
       title: "Product",
       dataIndex: "name",
       key: "name",
-      render: (text:string, record:ICartItem) => (
+      render: (text: string, record: ICartItem) => (
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <img src={record.image} alt={text} style={{ width: "80px", height: "80px", objectFit: "cover" }} />
           <span>{text}</span>
@@ -61,15 +102,15 @@ const Cart: React.FC = () => {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (price:number) => `$${price.toFixed(2)}`,
+      render: (price: number) => `$${price.toFixed(2)}`,
     },
     {
       title: "Quantity",
       dataIndex: "quantity",
       key: "quantity",
-      render: (_:any, record:ICartItem) => (
+      render: (_: any, record: ICartItem) => (
         <InputNumber min={1} max={10} value={record.quantity} onChange={(value) => {
-          if(value!==null){
+          if (value !== null) {
             updateQuantity(record.id, value);
           }
         }} />
@@ -78,12 +119,12 @@ const Cart: React.FC = () => {
     {
       title: "Total",
       key: "total",
-      render: (record:ICartItem) => `$${(record.price * record.quantity).toFixed(2)}`,
+      render: (record: ICartItem) => `$${(record.price * record.quantity).toFixed(2)}`,
     },
     {
       title: "Action",
       key: "action",
-      render: (_:any, record:ICartItem) => (
+      render: (_: any, record: ICartItem) => (
         <Button type="text" danger icon={<Trash2 size={16} />} onClick={() => removeFromCart(record.id)} />
       ),
     },
@@ -115,8 +156,8 @@ const Cart: React.FC = () => {
               </div>
 
               <Space direction="vertical" style={{ width: "100%" }}>
-                <Button type="primary" block size="large" onClick={handleCheckout}>
-                  Checkout
+                <Button type="primary" block size="large" onClick={handleConfirm}>
+                  Confirm
                 </Button>
                 <Button block onClick={() => navigate("/products")}>Continue Shopping</Button>
               </Space>

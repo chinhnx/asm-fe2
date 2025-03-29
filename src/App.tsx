@@ -19,6 +19,9 @@ import UserEdit from "./pages/admin/user/UserEdit";
 import { Navigate } from "react-router-dom";
 import Profile from "./pages/client/Profile";
 import CategoryPage from "./pages/client/CategoryPage";
+import Checkout from "./pages/client/Checkout";
+import Order from "./pages/client/Order";
+import OrderList from "./pages/admin/order/Oders";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -40,6 +43,8 @@ function App() {
         },
         { path: "products/:id", element: <ProductDetail /> },
         { path: "cart", element: <Cart /> },
+        { path: "checkout", element: <Checkout /> },
+        { path: "order", element: <Order /> },
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
         { path : "profile", element:<Profile/>},
@@ -58,6 +63,7 @@ function App() {
         { path: "category", element: isAuthenticated && role === "admin" ? <CategoryList /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "category-add", element: isAuthenticated && role === "admin" ? <CategoryAdd /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "category-edit/:id", element: isAuthenticated && role === "admin" ? <CategoryEdit /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
+        { path: "order", element: isAuthenticated && role === "admin" ? <OrderList /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "user", element: isAuthenticated && role === "admin" ? <UserList /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "user-edit/:id", element: isAuthenticated && role === "admin" ? <UserEdit /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
       ],

@@ -74,26 +74,23 @@
       "updatedAt": "2024-03-07T10:00:00Z"
     }
   ],
+  "carts": [],
   "orders": [
     {
-      "id": 1,
-      "userId": 1,
+      "userId": 8,
+      "address": "ha noi",
+      "total": 1299.99,
       "items": [
         {
-          "productId": 1,
-          "quantity": 1,
-          "price": 32990000
-        },
-        {
           "productId": 2,
-          "quantity": 1,
-          "price": 29990000
+          "name": "Gaming Laptop",
+          "price": 1299.99,
+          "quantity": 1
         }
       ],
-      "total": 62980000,
-      "status": "pending",
-      "createdAt": "2025-03-13T10:00:00Z",
-      "paymentMethod": "credit_card"
+      "methodPayment": "cod",
+      "status": "Đang xử lý",
+      "id": 1
     }
   ],
   "users": [
@@ -150,6 +147,24 @@
       "role": "user",
       "status": "active",
       "id": 7
+    },
+    {
+      "email": "trueman22004@gmail.com",
+      "password": "$2a$10$aQQNewA38O02sskZEXQVY.L2pTh1TzV8R49H9.OwepEG.3lRO/Swq",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "role": "user",
+      "status": "active",
+      "id": 8
+    },
+    {
+      "email": "trueman22005@gmail.com",
+      "password": "$2a$10$UFVRCpP5gzh42g3gpVcq2ubgTzyg7ni2kzq.vd1j4uScrbP1L64SC",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "role": "user",
+      "status": "active",
+      "id": 9
     }
   ]
 }
