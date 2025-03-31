@@ -1,48 +1,38 @@
 import axios from 'axios'
 import {
-    Button,
-    Checkbox,
-    Col,
-    ColorPicker,
+    Button, 
     Form,
     Input,
     InputNumber,
     message,
-    Radio,
     Rate,
-    Row,
     Select,
-    Slider,
     Space,
-    Switch,
-    Upload,
 } from 'antd';
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { IProductForm } from '../../../interface/product'
 import { Icategory } from '../../../interface/category'
-import { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { useList, useOne, useUpdate } from '../../../hooks';
+
 
 type Props = {}
 
-const ProductEdit = (props: Props) => {
+function ProductEdit () {
     const { Option } = Select;
-
+    const nav = useNavigate()
     const formItemLayout = {
         labelCol: { span: 6 },
         wrapperCol: { span: 14 },
     };
 
-    const normFile = (e: any) => {
-        console.log('Upload event:', e);
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e?.fileList;
-    };
+    // const normFile = (e: any) => {
+    //     console.log('Upload event:', e);
+    //     if (Array.isArray(e)) {
+    //         return e;
+    //     }
+    //     return e?.fileList;
+    // };
 
     //antd
     const { id } = useParams();
@@ -50,27 +40,12 @@ const ProductEdit = (props: Props) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate()
 
-    const getProductDetail = async () => {
-        if (!id) return;
-        const { data } = await axios.get(`http://localhost:3000/products/${id}`);
-        return data;
-    };
-    const { data: product } = useQuery({
-        queryKey: ["product"],
-        queryFn: getProductDetail,
-    });
-    console.log({ product });
+    const { data: product } = useOne({ resource: "products", id });
 
 
 
     //category
-    const { data: categories } = useQuery({
-        queryKey: ["categories"],
-        queryFn: async () => {
-            const { data } = await axios.get("http://localhost:3000/categories");
-            return data;
-        },
-    });
+     const { data: categories } = useList({ resource: "categories" });
 
     // Tạo object map categoryId -> categoryName
     const categoryMap = categories?.reduce((acc: Record<string, string>, category: Icategory) => {
@@ -86,24 +61,14 @@ const ProductEdit = (props: Props) => {
         });
     }, [product, categories]);
 
-    const updateProduct = useMutation({
-        mutationFn: async (updatedProduct: any) => {
-            return axios.put(`http://localhost:3000/products/${id}`, updatedProduct);
-        },
-        onSuccess: () => {
-            message.success("Cập nhật thành công!");
-            queryClient.invalidateQueries({ queryKey: ["products"] });
-            navigate("/admin/product");
-        },
-        onError: () => {
-            message.error("Cập nhật thất bại!");
-        },
-    });
+    const { mutate } = useUpdate({ resource: "products", id });
+
 
 
 
     const onFinish = (values: any) => {
-        updateProduct.mutate(values);
+        mutate(values);
+        nav("/admin/product")
     };
 
     return (
