@@ -96,7 +96,7 @@ function ProductList() {
                     <Button type="primary">
                         <Link to={`/admin/product-edit/${record.id}`}>Edit</Link>
                     </Button>
-                    <Button type="primary" danger onClick={() => confirmDelete(record)}>
+                    <Button type="primary" danger onClick={() => confirmDelete(record.id)}>
                         Delete
                     </Button>
 
