@@ -22,10 +22,12 @@ export const useOne = ({ resource = "products", id }: Props) => {
 };
 
 export const useCreate = ({ resource = "products" }: Props) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (values: any) => create({ resource, values }),
     onSuccess: () => {
       message.success("Them thanh cong");
+      queryClient.invalidateQueries({ queryKey: [resource] });
     },
     onError: () => {},
   });

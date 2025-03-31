@@ -3,6 +3,7 @@ import { Button, Form, Input, InputNumber, message, Select, Space } from "antd";
 import axios from "axios";
 import { Icategory } from "../../../interface/category";
 import { useNavigate } from "react-router-dom";
+import { useCreate, useList } from "../../../hooks";
 
 function ProductAdd() {
 
@@ -13,33 +14,17 @@ function ProductAdd() {
         labelCol: { span: 6 },
         wrapperCol: { span: 14 },
     };
-
-    const { data: categories } = useQuery({
-        queryKey: ["categories"],
-        queryFn: async () => {
-            const { data } = await axios.get("http://localhost:3000/categories");
-            return data;
-        },
-    });
-
-    const addProduct = async (data: any) => {
-
-
-        await axios.post("http://localhost:3000/products", data);
-    };
+    //get
+    const { data: categories } = useList({ resource: "categories" });
     
 
-    const { mutate } = useMutation({
-        mutationFn: addProduct,
-        onSuccess: () => {
-            message.success("Them san pham thanh cong");
-            nav("/admin/product")
-        },
-    });
+    const { mutate } = useCreate({ resource: "products" });
 
     function onFinish(values: any) {
         console.log(values);
         mutate(values);
+        nav("/admin/product")
+
     }
     return (
         <Form
