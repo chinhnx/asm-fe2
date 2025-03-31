@@ -1,52 +1,27 @@
 import { Image, Table, Button, message, Modal } from "antd";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Icategory } from "../../../interface/category";
+import { useDelete, useList } from "../../../hooks";
 
 function CategoryList() {
     const nav = useNavigate()
-    const queryClient = useQueryClient();
-
-
-    const getAllCategory = async () => {
-        const { data } = await axios.get("http://localhost:3000/categories");
-        return data.map((category: any, index: number) => ({
-            ...category,
-            key: category.id || `category-${index}`,
-        }));
-    };
-
-    const { data, isLoading } = useQuery({
-        queryKey: ["categories"],
-        queryFn: getAllCategory,
-    });
+    const { data, isLoading } = useList({ resource: "categories" });
 
     // Mutation xoa danh muc
-    const deleteCategory = useMutation({
-        mutationFn: async (id: Icategory) => {
-            await axios.delete(`http://localhost:3000/categories/${id}`);
-        },
-        onSuccess: () => {
-            message.success("Xoa thanh cong");
-            queryClient.invalidateQueries({ queryKey: ["categories"] });
-        },
-        onError: () => {
-            message.error("Xoa that bai");
-        },
-    });
+    const { mutate } = useDelete({ resource: "categories" });
 
 
 
-    const confirmDelete = (id: Icategory) => {
+
+    const confirmDelete = (category: Icategory) => {
         Modal.confirm({
             title: "Xác nhận xóa",
             content: "Bạn có chắc chắn muốn xóa sản phẩm này?",
             okText: "Xóa",
             okType: "danger",
             cancelText: "Hủy",
-            onOk: () => deleteCategory.mutate(id),
+            onOk: () => mutate(category.id),
         });
     };
 
