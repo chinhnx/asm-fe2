@@ -165,6 +165,35 @@
       "role": "user",
       "status": "active",
       "id": 9
+    },
+    {
+      "email": "trueman22006@gmail.com",
+      "password": "$2a$10$VQYeyn22Ohy3drLjxQLxUesjjIyaE4hzOuMVmqUPjtQ5yan8c74O.",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "role": "user",
+      "status": "active",
+      "id": 10
+    },
+    {
+      "email": "trueman22006+7@gmail.com",
+      "password": "$2a$10$mc5qkqnIwuZrcGbm0OBDIuqSibcOGAV4bIhdGzd.qEJYSwe5CpxBO",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "repassword": "123456",
+      "role": "user",
+      "status": "active",
+      "id": 11
+    },
+    {
+      "email": "trueman22008@gmail.com",
+      "password": "$2a$10$7oLDYPT41xPp1YdcPXyDs.KRneowpfjXauyNobTuXjJjrpVDerEvq",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "repassword": "123456",
+      "role": "user",
+      "status": "active",
+      "id": 12
     }
   ]
 }

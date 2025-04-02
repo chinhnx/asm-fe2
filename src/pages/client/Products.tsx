@@ -3,25 +3,14 @@ import { Typography, Card, Row, Col, Spin } from 'antd';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useList } from '../../hooks';
 
 const { Title } = Typography;
 const { Meta } = Card;
 
-const Product: React.FC = () => {
+function Product() {
   const navigate = useNavigate();
-
-  const getAllProduct = async () => {
-    const { data } = await axios.get("http://localhost:3000/products");
-    return data.map((product: any, index: number) => ({
-      ...product,
-      key: product.id || `product-${index}`,
-    }));
-  };
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["products"],
-    queryFn: getAllProduct,
-  });
+  const { data, isLoading } = useList({ resource: "products" });
 
   if (isLoading) {
     return (
