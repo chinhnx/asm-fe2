@@ -7,7 +7,7 @@ const token = localStorage.getItem("token");
 const axiosClient = axios.create({
   baseURL: "http://localhost:3000/",
   headers: {
-    Authorization: token && `Beaer ${token}`,
+    Authorization: token && `Bearer ${token}`,
   },
 });
 

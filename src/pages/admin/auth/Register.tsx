@@ -19,12 +19,12 @@ function Register() {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      nav("/"); // Nếu đã đăng nhập, chuyển về trang chính
-    }
-  }, [nav]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     nav("/"); // Nếu đã đăng nhập, chuyển về trang chính
+  //   }
+  // }, [nav]);
 
   return (
     <Row justify="center" style={{ height: "100vh", marginTop: "50px" }}>
