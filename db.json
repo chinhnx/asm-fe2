@@ -91,6 +91,28 @@
       "methodPayment": "cod",
       "status": "Đang xử lý",
       "id": 1
+    },
+    {
+      "userId": 10,
+      "address": "ha noi 2",
+      "total": 1449.98,
+      "items": [
+        {
+          "productId": 2,
+          "name": "Gaming Laptop",
+          "price": 1299.99,
+          "quantity": 1
+        },
+        {
+          "productId": 3,
+          "name": "Wireless Earbuds",
+          "price": 149.99,
+          "quantity": 1
+        }
+      ],
+      "methodPayment": "bank",
+      "status": "Đang giao",
+      "id": 2
     }
   ],
   "users": [
