@@ -3,24 +3,19 @@ import axios, { AxiosError } from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Col } from "antd";
+import { useAuth } from "../../../hooks";
 
 function Register() {
   const [form] = Form.useForm();
   const nav = useNavigate();
+  const { mutate } = useAuth({ resource: "register" });
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      const { repassword, ...userData } = {
-        ...values,
-        role: "user",
-        status: "active",
-      };
-      await axios.post("/register", userData);
-      message.success("Đăng ký thành công!");
-      nav("/login");
+      mutate(values);
     } catch (error) {
-      message.error("Đăng ký thất bại: " + ((error as AxiosError).message || "Lỗi không xác định"));
+      message.error("Vui lòng nhập đầy đủ thông tin!");
     }
   };
 

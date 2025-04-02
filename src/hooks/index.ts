@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { create, deleteOne, getList, getOne, update } from "../providers";
+import { auth, create, deleteOne, getList, getOne, update } from "../providers";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 type Props = {
   resource: string;
@@ -53,5 +55,36 @@ export const useDelete = ({ resource = "products" }: Props) => {
       queryClient.invalidateQueries({ queryKey: [resource] });
     },
     onError: () => {},
+  });
+};
+
+export const useAuth = ({ resource = "register" }) => {
+  const nav = useNavigate();
+
+  return useMutation({
+    mutationFn: async (values: any) => {
+      const { repassword, ...userData } = {
+        ...values,
+        role: "user",
+        status: "active",
+      };
+
+      return auth({resource, values:userData}).then((res) => res.data);
+    },
+    onSuccess: (data) => {
+      message.success("Thành công!");
+
+      if (resource === "register") {
+        nav("/login"); // Nếu đăng ký, chuyển hướng đến trang đăng nhập
+        return;
+      }
+
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      
+    },
+    onError: (error) => {
+      message.error("Thất bại: "+ error.message);
+    },
   });
 };

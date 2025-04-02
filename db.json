@@ -165,6 +165,15 @@
       "role": "user",
       "status": "active",
       "id": 9
+    },
+    {
+      "email": "trueman22006@gmail.com",
+      "password": "$2a$10$VQYeyn22Ohy3drLjxQLxUesjjIyaE4hzOuMVmqUPjtQ5yan8c74O.",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "role": "user",
+      "status": "active",
+      "id": 10
     }
   ]
 }
