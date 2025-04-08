@@ -9,7 +9,7 @@ const { Option } = Select;
 const OrderList = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const statusFlow = ["Đang xử lý", "Đã xác nhận", "Đang giao", "Hoàn thành", "Hủy"];
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -64,19 +64,23 @@ const OrderList = () => {
       title: "Cập nhật trạng thái",
       key: "updateStatus",
       render: (order: any) => {
-        const isDisabled = order.status === "Hoàn thành" || order.status === "Hủy"; // Không cho đổi nếu đã hoàn thành hoặc hủy
+        const isDisabled = order.status === "Hoàn thành" || order.status === "Hủy";
+    
+        // Lọc chỉ những trạng thái đứng sau trạng thái hiện tại
+        const currentIndex = statusFlow.indexOf(order.status);
+        const availableStatuses = statusFlow.slice(currentIndex + 1);
+    
         return (
           <Select
             defaultValue={order.status}
             style={{ width: 150 }}
             onChange={(value) => updateOrderStatus(order.id, value)}
-            disabled={isDisabled} // Không cho phép chọn lại nếu đã Hoàn thành hoặc Hủy
+            disabled={isDisabled || availableStatuses.length === 0}
           >
-            <Option value="Đang xử lý">Đang xử lý</Option>
-            <Option value="Đã xác nhận">Đã xác nhận</Option>
-            <Option value="Đang giao">Đang giao</Option>
-            <Option value="Hoàn thành">Hoàn thành</Option>
-            <Option value="Hủy">Hủy</Option>
+            <Option value={order.status} disabled>{order.status}</Option>
+            {availableStatuses.map(status => (
+              <Option key={status} value={status}>{status}</Option>
+            ))}
           </Select>
         );
       },
