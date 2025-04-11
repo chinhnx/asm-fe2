@@ -1,68 +1,57 @@
-import { Image, Table, Button, message, Modal } from "antd";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Image, Table, Button,  Modal } from "antd";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { IProduct } from "../../../interface/product";
+import { useDelete, useList } from "../../../hooks";
+import { useEffect, useState } from "react";
 
 function ProductList() {
     const nav = useNavigate()
-    const queryClient = useQueryClient();
+    const { data: products, isLoading: isLoadingProducts } = useList({ resource: "products" });
+    const { data: categories } = useList({ resource: "categories" });
 
+    // State lưu trữ danh sách sản phẩm sau khi đã ghép với danh mục
+    const [productList, setProductList] = useState<IProduct[]>([]);
 
-    const getAllProduct = async () => {
-        const [productsRes, categoriesRes] = await Promise.all([
-            axios.get("http://localhost:3000/products"),
-            axios.get("http://localhost:3000/categories")
-        ]);
-    
-        const products = productsRes.data;
-        const categories = categoriesRes.data;
-    
-        // Tạo object để tra cứu tên danh mục theo categoryId
-        const categoryMap = categories.reduce((acc: Record<string, string>, category: any) => {
-            acc[category.id] = category.name;
-            return acc;
-        }, {});
-    
-        // Ánh xạ categoryId thành categoryName
-        return products.map((product: any, index: number) => ({
-            ...product,
-            key: product.id || `product-${index}`,
-            categoryName: categoryMap[product.categoryId] || "Unknown"
-        }));
-    };
-    
-    const { data, isLoading } = useQuery({
-        queryKey: ["products"],
-        queryFn: getAllProduct,
-    });
+    useEffect(() => {
+        if (products && categories) {
+            // Tạo object để tra cứu tên danh mục theo categoryId
+            const categoryMap = categories.reduce((acc: Record<string, string>, category: any) => {
+                acc[category.id] = category.name;
+                return acc;
+            }, {});
+
+            // Gán categoryName cho từng sản phẩm
+            const getCategoryName = products.map((product: any) => ({
+                ...product,
+                key: product.id,
+                categoryName: categoryMap[product.categoryId] || "Unknown",
+            }));
+
+            setProductList(getCategoryName);
+        }
+    }, [products, categories]);
+
 
     // Mutation xoa san pham
-    const deleteProduct = useMutation({
-        mutationFn: async (id: IProduct) => {
-            await axios.delete(`http://localhost:3000/products/${id}`);
-        },
-        onSuccess: () => {
-            message.success("Xoa thanh cong");
-            queryClient.invalidateQueries({ queryKey: ["products"] });
-        },
-        onError: () => {
-            message.error("Xoa that bai");
-        },
-    });
+    const { mutate } = useDelete({ resource: "products" });
 
 
 
-    const confirmDelete = (id: IProduct) => {
+
+    const confirmDelete = (product: IProduct) => {
+        console.log("Product ID:", product.id, typeof product.id); // Kiểm tra kiểu dữ liệu id
         Modal.confirm({
             title: "Xác nhận xóa",
             content: "Bạn có chắc chắn muốn xóa sản phẩm này?",
             okText: "Xóa",
             okType: "danger",
             cancelText: "Hủy",
-            onOk: () => deleteProduct.mutate(id),
+            onOk: () => mutate(product.id),
         });
     };
+    
 
 
     const columns = [
@@ -121,12 +110,12 @@ function ProductList() {
     return (
         <div>
             <Button
-                style={{ marginBottom: 16, backgroundColor: "#4a88e9", color: "white" }}
+                style={{ marginBottom: 16, backgroundColor: "green", borderColor: "green", color: "white" }}
                 onClick={() => nav("/admin/product-add")}
             >
                 Them san pham
             </Button>
-            <Table dataSource={data} columns={columns} loading={isLoading} />;
+            <Table dataSource={productList} columns={columns} loading={isLoadingProducts} />;
         </div>
     )
 }

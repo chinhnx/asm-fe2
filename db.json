@@ -74,7 +74,24 @@
       "updatedAt": "2024-03-07T10:00:00Z"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "userId": 7,
+      "items": [
+        {
+          "productId": 4,
+          "name": "Smartphone",
+          "image": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500",
+          "price": 899.99,
+          "quantity": 1,
+          "total": 899.99
+        }
+      ],
+      "total": 899.99,
+      "createdAt": "2025-04-08T04:03:16.136Z",
+      "id": 1
+    }
+  ],
   "orders": [
     {
       "userId": 8,
@@ -89,8 +106,24 @@
         }
       ],
       "methodPayment": "cod",
-      "status": "Đang xử lý",
+      "status": "Hoàn thành",
       "id": 1
+    },
+    {
+      "userId": 7,
+      "address": "12",
+      "total": 1799.98,
+      "items": [
+        {
+          "productId": 4,
+          "name": "Smartphone",
+          "price": 899.99,
+          "quantity": 2
+        }
+      ],
+      "methodPayment": "cod",
+      "status": "Hoàn thành",
+      "id": 2
     }
   ],
   "users": [
@@ -165,6 +198,35 @@
       "role": "user",
       "status": "active",
       "id": 9
+    },
+    {
+      "email": "trueman22006@gmail.com",
+      "password": "$2a$10$VQYeyn22Ohy3drLjxQLxUesjjIyaE4hzOuMVmqUPjtQ5yan8c74O.",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "role": "user",
+      "status": "active",
+      "id": 10
+    },
+    {
+      "email": "trueman22006+7@gmail.com",
+      "password": "$2a$10$mc5qkqnIwuZrcGbm0OBDIuqSibcOGAV4bIhdGzd.qEJYSwe5CpxBO",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "repassword": "123456",
+      "role": "user",
+      "status": "active",
+      "id": 11
+    },
+    {
+      "email": "trueman22008@gmail.com",
+      "password": "$2a$10$7oLDYPT41xPp1YdcPXyDs.KRneowpfjXauyNobTuXjJjrpVDerEvq",
+      "name": "đào tùng lâm",
+      "phone": "0915656298",
+      "repassword": "123456",
+      "role": "user",
+      "status": "active",
+      "id": 12
     }
   ]
 }

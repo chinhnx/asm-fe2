@@ -3,58 +3,18 @@ import axios, { AxiosError } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks";
 
 const { Text } = Typography;
 
 function Login() {
-  const [form] = Form.useForm();
-  const nav = useNavigate();
+  // const [form] = Form.useForm();
+  // const nav = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      nav("/");
-    }
-  }, []);
+  const { mutate } = useAuth({ resource: "login" });
 
-  const handleSubmit = async () => {
-    try {
-      const values = await form.validateFields();
-      const { data } = await axios.post("http://localhost:3000/login", values);
-      const { accessToken, user } = data;
-      const decodedToken: any = jwtDecode(accessToken);
-      console.log(decodedToken);
-
-      if (user.status === "banned") {
-        notification.error({
-          message: "Login Failed",
-          description: "Tài khoản của bạn đã bị khóa.",
-          duration: 5,
-        });
-        return;
-      }
-
-      const userData = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-      };
-      localStorage.setItem("token", accessToken);
-      localStorage.setItem("role", user.role);
-      localStorage.setItem("user", JSON.stringify(userData));
-
-      notification.success({ message: "Đăng nhập thành công!" });
-
-      if (user.role === "user") {
-        nav("/");
-        window.location.reload();
-      } else {
-        nav("/admin");
-      }
-    } catch (error) {
-      message.error("Login failed: " + (error as AxiosError).message);
-    }
+   const onFinish = (values: any) => {
+    mutate(values);
   };
 
   return (
@@ -63,7 +23,7 @@ function Login() {
         <h1 style={{ textAlign: "center", color: "blue", fontSize: "24px", fontWeight: "bold" }}>
           Đăng nhập
         </h1>
-        <Form form={form} onFinish={handleSubmit} layout="vertical">
+        <Form onFinish={onFinish} layout="vertical">
           <Form.Item name="email" label="Email" rules={[{ required: true, type: "email" }]}>
             <Input type="email" />
           </Form.Item>
