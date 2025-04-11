@@ -29,18 +29,21 @@ const OrderList = () => {
           return acc;
         }, {});
 
-        // Gán dữ liệu vào đơn hàng
-        const updatedOrders = ordersData.map((order: any) => ({
-          ...order,
-          userName: userMap[order.userId] || "Không xác định",
-          products: Array.isArray(order.items) // Chuyển từ 'products' thành 'items'
-            ? order.items.map((item: any) => ({
+       // Sắp xếp theo thời gian đặt hàng (giả sử `createdAt` là ngày đặt hàng)
+      const updatedOrders = ordersData
+      .map((order: any) => ({
+        ...order,
+        userName: userMap[order.userId] || "Không xác định",
+        products: Array.isArray(order.items)
+          ? order.items.map((item: any) => ({
               ...item,
-              ...productMap[item.productId], // Lấy thông tin sản phẩm từ danh sách sản phẩm
+              ...productMap[item.productId],
             }))
-            : [], // Nếu items không phải mảng, gán thành []
-        }));
+          : [],
+      }))
+       .sort((a: any, b: any) => b.id - a.id); // Sắp xếp giảm dần theo ID
 
+        
 
         setOrders(updatedOrders);
         setLoading(false);
@@ -81,9 +84,10 @@ const OrderList = () => {
       render: (products: any[]) => (
         <ul style={{ paddingLeft: 16 }}>
           {products.map((product) => (
-            <li key={product.productId}>
+            <div key={product.productId}>
+              <img src={product.image} style={{width:"100px", marginBottom:"10px"}} alt="" />
               <strong>{product.name}</strong> - {product.quantity} x {product.price.toLocaleString()}đ
-            </li>
+            </div>
           ))}
         </ul>
       ),
@@ -125,17 +129,17 @@ const OrderList = () => {
         );
       },
     },
-    {
-      title: "Hành động",
-      key: "actions",
-      render: (order: any) => (
-        <Space>
-          <Button type="primary">
-            <Link to={`/admin/order-detail/${order.id}`}>Xem</Link>
-          </Button>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Hành động",
+    //   key: "actions",
+    //   render: (order: any) => (
+    //     <Space>
+    //       <Button type="primary">
+    //         <Link to={`/admin/order-detail/${order.id}`}>Xem</Link>
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (

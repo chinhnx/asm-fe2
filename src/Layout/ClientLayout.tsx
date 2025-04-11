@@ -1,14 +1,19 @@
-import { Layout, Menu, MenuProps, theme } from 'antd';
+import { Avatar, Dropdown, Layout, Menu, MenuProps, theme } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Home, ShoppingBag, ShoppingCart, UserCircle } from 'lucide-react';
-import { LoginOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { LoginOutlined, AppstoreOutlined, UserOutlined } from '@ant-design/icons';
+import { useUser } from '../contexts/userContext';
+import { useCart } from '../contexts/carContext';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 function Client() {
   const navigate = useNavigate();
+  const { user, logout } = useUser();
+  const { cart } = useCart();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -47,20 +52,25 @@ function Client() {
     },
   ];
 
-  const items2: MenuItem[] = [
-    {
-      key: 'cart',
-      icon: <ShoppingCart size={16} />,
-      label: <Link to="/cart">Cart</Link>,
-    },
-    {
-      key: isLoggedIn ? 'profile' : 'login',
-      icon: isLoggedIn ? <UserCircle size={16} /> : <LoginOutlined />,
-      label: <Link to={isLoggedIn ? "/profile" : "/login"}>
-        {isLoggedIn ? 'Profile' : 'Login'}
-      </Link>,
-    },
-  ];
+ const items2: MenuItem[] = [
+  {
+    key: 'cart',
+    icon: <ShoppingCart size={16} />,
+    label: <Link to="/cart">Cart</Link>,
+  },
+  {
+    key: isLoggedIn ? 'profile' : 'login',
+    // icon: isLoggedIn ? <UserCircle size={16} /> : <LoginOutlined />,
+    label: isLoggedIn ? (
+      <Link to="/profile" style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ marginLeft: 8 }}>{user?.email || 'Profile'}</span>
+      </Link>
+    ) : (
+      <Link to="/login">Login</Link>
+    ),
+  },
+];
+
 
   const {
     token: { colorBgContainer },
@@ -114,6 +124,7 @@ function Client() {
               onClick={handleMenuClick}
               style={{ flex: 1, minWidth: 0 }}
             />
+           
           </div>
         </Header>
 

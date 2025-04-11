@@ -7,6 +7,7 @@ export interface IOrder {
   items: {
     productId: number;
     name: string;
+    image:string;
     price: number;
     quantity: number;
   }[];

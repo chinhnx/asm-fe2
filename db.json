@@ -85,11 +85,12 @@
           "productId": 2,
           "name": "Gaming Laptop",
           "price": 1299.99,
+          "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
           "quantity": 1
         }
       ],
       "methodPayment": "cod",
-      "status": "Đang xử lý",
+      "status": "Đã xác nhận",
       "id": 1
     },
     {
@@ -101,12 +102,14 @@
           "productId": 2,
           "name": "Gaming Laptop",
           "price": 1299.99,
+          "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500",
           "quantity": 1
         },
         {
           "productId": 3,
           "name": "Wireless Earbuds",
           "price": 149.99,
+          "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500",
           "quantity": 1
         }
       ],
