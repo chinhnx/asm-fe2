@@ -1,20 +1,16 @@
 import React from 'react';
-import { Typography, Card, Spin, Tag, Button, Row, Col } from 'antd';
+import { Typography, Card, Spin, Tag, Button, Row, Col, message } from 'antd';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-// import { getProduct } from '../../api/product';
-import { ArrowLeft } from 'lucide-react';
-import axios from 'axios';
 import { useOne } from '../../hooks';
 import { ICartItem, IProduct } from '../../interface/product';
+import { ArrowLeft } from 'lucide-react';
 
 const { Title, Paragraph } = Typography;
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: product ,isLoading} = useOne({ resource: "products", id });
-    
+  const { data: product, isLoading } = useOne({ resource: "products", id });
 
   if (isLoading) {
     return (
@@ -33,16 +29,25 @@ const ProductDetail: React.FC = () => {
   }
 
   const addToCart = (product: IProduct) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      message.warning("Please login to add products to your cart.");
+      return navigate("/login", { state: { from: `/products/${product.id}` } });
+    }
+
     const cart: ICartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
 
     const updatedCart = cart.some((item) => item.id === product.id)
       ? cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        )
       : [...cart, { ...product, quantity: 1 } as ICartItem];
 
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    navigate('/cart');
   };
+
   return (
     <div style={{ padding: '24px' }}>
       <Button 
@@ -52,7 +57,7 @@ const ProductDetail: React.FC = () => {
       >
         Back to Products
       </Button>
-      
+
       <Row gutter={[24, 24]}>
         <Col xs={24} md={12}>
           <img 
@@ -78,7 +83,6 @@ const ProductDetail: React.FC = () => {
                   image: product.image,
                   quantity: 1,
                 } as ICartItem);
-                navigate('/cart'); // Chuyển hướng đến trang giỏ hàng
               }}
             >
               Add to Cart

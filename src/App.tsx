@@ -60,7 +60,7 @@ function App() {
       path: "admin",
       element: isAuthenticated && role === "admin" ? <Admin /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} />,
       children: [
-        { path: "dashboard", element: isAuthenticated && role === "admin" ? <Dashboard /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
+        { path: "", element: isAuthenticated && role === "admin" ? <Dashboard /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "product", element: isAuthenticated && role === "admin" ? <ProductList /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "product-add", element: isAuthenticated && role === "admin" ? <ProductAdd /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "product-edit/:id", element: isAuthenticated && role === "admin" ? <ProductEdit /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },

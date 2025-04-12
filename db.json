@@ -77,183 +77,6 @@
   "carts": [],
   "orders": [
     {
-      "userId": 8,
-      "address": "ha noi",
-      "total": 1299.99,
-      "items": [
-        {
-          "productId": 2,
-          "name": "Gaming Laptop",
-          "price": 1299.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Hoàn thành",
-      "id": 1
-    },
-    {
-      "userId": 7,
-      "address": "12",
-      "total": 1799.98,
-      "items": [
-        {
-          "productId": 4,
-          "name": "Smartphone",
-          "price": 899.99,
-          "quantity": 2
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Hoàn thành",
-      "id": 2
-    },
-    {
-      "userId": 7,
-      "address": "số 25a ngõ 9/24 trần quốc hoàn, toor6, phường dịch vọng hậu, cầu giấy",
-      "total": 1049.98,
-      "items": [
-        {
-          "productId": 4,
-          "name": "Smartphone",
-          "price": 899.99,
-          "quantity": 1
-        },
-        {
-          "productId": 3,
-          "name": "Wireless Earbuds",
-          "price": 149.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Hoàn thành",
-      "id": 3
-    },
-    {
-      "userId": 3,
-      "address": "Ha Noi",
-      "total": 2199.98,
-      "items": [
-        {
-          "productId": 4,
-          "name": "Smartphone",
-          "price": 899.99,
-          "quantity": 1
-        },
-        {
-          "productId": 2,
-          "name": "Gaming Laptop",
-          "price": 1299.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang xử lý",
-      "id": 4
-    },
-    {
-      "userId": 7,
-      "address": "25a Ngh. 9/24",
-      "total": 149.99,
-      "items": [
-        {
-          "productId": 3,
-          "name": "Wireless Earbuds",
-          "price": 149.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
-      "id": 5
-    },
-    {
-      "userId": 13,
-      "address": "25a trần quốc hoàn",
-      "total": 149.99,
-      "items": [
-        {
-          "productId": 3,
-          "name": "Wireless Earbuds",
-          "price": 149.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
-      "id": 6
-    },
-    {
-      "userId": 13,
-      "address": "25a trần quốc hoàn",
-      "total": 899.99,
-      "items": [
-        {
-          "productId": 4,
-          "name": "Smartphone",
-          "price": 899.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
-      "id": 7
-    },
-    {
-      "userId": 13,
-      "name": "chỉnh",
-      "address": "25a trần quốc hoàn",
-      "total": 299.98,
-      "items": [
-        {
-          "productId": 3,
-          "name": "Wireless Earbuds",
-          "price": 149.99,
-          "quantity": 2
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
-      "id": 8
-    },
-    {
-      "userId": 13,
-      "name": "chỉnh",
-      "address": "ehlo",
-      "total": 149.99,
-      "items": [
-        {
-          "productImg": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500",
-          "productId": 3,
-          "name": "Wireless Earbuds",
-          "price": 149.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang giao",
-      "id": 9
-    },
-    {
-      "userId": 13,
-      "name": "chỉnh",
-      "address": "Ha Noi",
-      "total": 149.99,
-      "items": [
-        {
-          "productImg": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500",
-          "productId": 3,
-          "name": "Wireless Earbuds",
-          "price": 149.99,
-          "quantity": 1
-        }
-      ],
-      "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
-      "id": 10
-    },
-    {
       "userId": 13,
       "name": "chỉnh",
       "address": "25a trần quốc hoàn",
@@ -268,9 +91,28 @@
         }
       ],
       "methodPayment": "cod",
-      "status": "Đang chờ xử lý",
+      "status": "Hoàn thành",
       "createdAt": "2025-04-12T02:45:33.036Z",
       "id": 11
+    },
+    {
+      "userId": 13,
+      "name": "chỉnh",
+      "address": "số 25a ngõ 9/24 trần quốc hoàn, toor6, phường dịch vọng hậu, cầu giấy",
+      "total": 1049.93,
+      "items": [
+        {
+          "productImg": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500",
+          "productId": 3,
+          "name": "Wireless Earbuds",
+          "price": 149.99,
+          "quantity": 7
+        }
+      ],
+      "methodPayment": "cod",
+      "status": "Hoàn thành",
+      "createdAt": "2025-04-12T02:52:33.100Z",
+      "id": 12
     }
   ],
   "users": [
