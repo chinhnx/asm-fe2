@@ -62,6 +62,7 @@ const Checkout = () => {
                 })),
                 methodPayment: values.payment,
                 status: "Đang chờ xử lý",
+                createdAt: new Date().toISOString(), // ✅ Thêm dòng này
             });
     
             // 2. Xóa tất cả giỏ hàng của userId

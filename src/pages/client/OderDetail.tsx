@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import dayjs from "dayjs";
 import {
   Card,
   Table,
@@ -92,18 +93,19 @@ const OderDetailClient = () => {
       <Row gutter={24}>
         <Col span={16}>
           <Card bordered style={{ marginBottom: 24 }}>
-            <Descriptions title="Thông tin khách hàng" column={2}>
-              <Descriptions.Item label="Họ tên">{order.name}</Descriptions.Item>
-              <Descriptions.Item label="User ID">{order.userId}</Descriptions.Item>
-              <Descriptions.Item label="Ngày đặt">
-                {new Date(order.createdAt).toLocaleDateString("vi-VN")}
-              </Descriptions.Item>
-              <Descriptions.Item label="Trạng thái">
-                <Tag color={statusColors[order.status] || 'default'}>
-                  {order.status}
-                </Tag>
-              </Descriptions.Item>
-            </Descriptions>
+          <Descriptions title="Thông tin khách hàng" column={2}>
+  <Descriptions.Item label="Họ tên">{order.name}</Descriptions.Item>
+  <Descriptions.Item label="User ID">{order.userId}</Descriptions.Item>
+  <Descriptions.Item label="Ngày đặt">
+    {dayjs(order.createdAt).format("HH:mm:ss - DD/MM/YYYY")}
+  </Descriptions.Item>
+  <Descriptions.Item label="Trạng thái">
+    <Tag color={statusColors[order.status] || 'default'}>
+      {order.status}
+    </Tag>
+  </Descriptions.Item>
+</Descriptions>
+
           </Card>
 
           <Card bordered title="Danh sách sản phẩm">

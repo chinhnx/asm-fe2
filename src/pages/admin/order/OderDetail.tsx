@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import dayjs from "dayjs";
 import { Descriptions, Table, Typography, Spin, Empty, Card } from "antd";
 
 const { Title } = Typography;
@@ -71,17 +72,24 @@ const fetchOrderDetail = async () => {
       <Title level={3}>Chi tiết đơn hàng #{order.id}</Title>
 
       <Card style={{ marginBottom: 24 }}>
-        <Descriptions title="Thông tin đơn hàng" bordered>
-          <Descriptions.Item label="Trạng thái" span={3}>
-            {order.status}
-          </Descriptions.Item>
-          <Descriptions.Item label="Tổng tiền" span={3}>
-            {order.total.toLocaleString()}đ
-          </Descriptions.Item>
-          <Descriptions.Item label="Ngày đặt" span={3}>
-            {new Date(order.createdAt).toLocaleDateString("vi-VN")}
-          </Descriptions.Item>
-        </Descriptions>
+      <Descriptions title="Thông tin đơn hàng" bordered>
+  <Descriptions.Item label="Trạng thái" span={3}>
+    {order.status}
+  </Descriptions.Item>
+  <Descriptions.Item label="Tổng tiền" span={3}>
+    {order.total.toLocaleString()}đ
+  </Descriptions.Item>
+  <Descriptions.Item label="Ngày đặt" span={3}>
+    {dayjs(order.createdAt).format("HH:mm:ss - DD/MM/YYYY")}
+  </Descriptions.Item>
+  <Descriptions.Item label="Phương thức thanh toán" span={3}>
+    {order.methodPayment || "Chưa chọn"}
+  </Descriptions.Item>
+  <Descriptions.Item label="Địa chỉ giao hàng" span={3}>
+    {order.address}
+  </Descriptions.Item>
+</Descriptions>
+
 
         <Descriptions title="Thông tin khách hàng" bordered style={{ marginTop: 24 }}>
           <Descriptions.Item label="Tên">{order.user.name}</Descriptions.Item>
