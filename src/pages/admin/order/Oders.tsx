@@ -7,14 +7,22 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const OrderList = () => {
+  const getAuthHeader = () => ({
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const statusFlow = ["Đang xử lý", "Đã xác nhận", "Đang giao", "Hoàn thành", "Hủy"];
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const { data: ordersData } = await axios.get("http://localhost:3000/orders"); // API lấy đơn hàng
-        const { data: usersData } = await axios.get("http://localhost:3000/users"); // API lấy danh sách user
+        const { data: ordersData } = await axios.get("http://localhost:3000/orders",getAuthHeader()); // API lấy đơn hàng
+        const { data: usersData } = await axios.get("http://localhost:3000/users",getAuthHeader()
+          
+        ); // API lấy danh sách user
 
         // Map userId từ orders -> userName từ users
         const userMap = usersData.reduce((acc: any, user: any) => {
@@ -91,7 +99,7 @@ const OrderList = () => {
       render: (order: any) => (
         <Space>
           <Button type="primary">
-            <Link to={`/order-detail/${order.id}`}>Xem</Link>
+            <Link to={`/admin/order-detail/${order.id}`}>Xem</Link>
           </Button>
         </Space>
       ),

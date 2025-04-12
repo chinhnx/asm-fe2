@@ -49,11 +49,12 @@ const Checkout = () => {
             // 1. Gửi đơn hàng lên server
             await axios.post("http://localhost:3000/orders", {
                 userId: user.id,
-                name: values.name,
+                name: user.name,
                 address: values.address,
                 phone: values.phone,
                 total: mergedCartItems.reduce((total: any, item: any) => total + item.price * item.quantity, 0),
                 items: mergedCartItems.map((item: any) => ({
+                    productImg: item.image,
                     productId: item.productId,
                     name: item.name,
                     price: item.price,

@@ -13,11 +13,16 @@ const Order = () => {
   const userId = user?.id; // Lấy userId từ localStorage
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
     if (!userId) {
       setLoading(false);
       return;
     }
-    axios.get(`http://localhost:3000/orders?userId=${userId}`)
+    axios.get(`http://localhost:3000/orders?userId=${userId}`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
       .then(response => {
         setOrders(response.data);
         setLoading(false);
