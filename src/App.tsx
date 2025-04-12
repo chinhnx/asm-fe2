@@ -22,6 +22,9 @@ import CategoryPage from "./pages/client/CategoryPage";
 import Checkout from "./pages/client/Checkout";
 import Order from "./pages/client/Order";
 import OrderList from "./pages/admin/order/Oders";
+import OderDetail from "./pages/admin/order/OderDetail";
+import OderDetailClient from "./pages/client/OderDetail";
+
 
 function App() {
   const token = localStorage.getItem("token");
@@ -45,6 +48,7 @@ function App() {
         { path: "cart", element: <Cart /> },
         { path: "checkout", element: <Checkout /> },
         { path: "order", element: <Order /> },
+        { path: "order-detail/:id", element: <OderDetailClient/> },
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
         { path : "profile", element:<Profile/>},
@@ -64,6 +68,7 @@ function App() {
         { path: "category-add", element: isAuthenticated && role === "admin" ? <CategoryAdd /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "category-edit/:id", element: isAuthenticated && role === "admin" ? <CategoryEdit /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "order", element: isAuthenticated && role === "admin" ? <OrderList /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
+        { path: "order-detail/:id", element: isAuthenticated && role === "admin" ? <OderDetail /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "user", element: isAuthenticated && role === "admin" ? <UserList /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
         { path: "user-edit/:id", element: isAuthenticated && role === "admin" ? <UserEdit /> : <Navigate to={isAuthenticated && role === "user" ? "/" : "/login"} /> },
       ],

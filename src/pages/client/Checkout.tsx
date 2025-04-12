@@ -49,11 +49,12 @@ const Checkout = () => {
             // 1. Gửi đơn hàng lên server
             await axios.post("http://localhost:3000/orders", {
                 userId: user.id,
-                name: values.name,
+                name: user.name,
                 address: values.address,
                 phone: values.phone,
                 total: mergedCartItems.reduce((total: any, item: any) => total + item.price * item.quantity, 0),
                 items: mergedCartItems.map((item: any) => ({
+                    productImg: item.image,
                     productId: item.productId,
                     name: item.name,
                     price: item.price,
@@ -61,6 +62,7 @@ const Checkout = () => {
                 })),
                 methodPayment: values.payment,
                 status: "Đang chờ xử lý",
+                createdAt: new Date().toISOString(), // ✅ Thêm dòng này
             });
     
             // 2. Xóa tất cả giỏ hàng của userId

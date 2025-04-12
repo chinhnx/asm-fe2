@@ -49,6 +49,7 @@ const Cart: React.FC = () => {
       return;
     }
 
+    console.log(user);
     try {
       const response = await fetch("http://localhost:3000/carts", {
         method: "POST",
@@ -56,7 +57,9 @@ const Cart: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          // userName:user.name,
           userId: user.id, 
+          name : user.name,
           items: cart.map(item => ({
             productId: item.id,
             name: item.name,
